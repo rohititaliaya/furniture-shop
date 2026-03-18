@@ -93,7 +93,7 @@ jQuery.noConflict();
                     </div>
                 </td>
                 <td class="text-muted"><span>${order.howmanydaysago}</span></td>
-                <td class="text-danger">${order.money}đ</td>
+                <td class="text-danger">₹${order.money}</td>
                 <td>${is_paid}</td>
                 <td>${status}</td>
                 <td>
@@ -389,11 +389,11 @@ jQuery.noConflict();
                         <td>
                         ${
                             total_discount_percentage > 0
-                                ? `<del>${formatter.format(detailed_product.original_price)}đ</del>`
+                                ? `<del>₹${formatter.format(detailed_product.original_price)}</del>`
                                 : ''
                         }
                             <p class="js-unit-price text-danger m-0" data-unit-price="${unit_price}">
-                                ${formatter.format(unit_price)}đ
+                                ₹${formatter.format(unit_price)}
                             </p>
                         </td>
                         </td>

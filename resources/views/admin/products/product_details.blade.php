@@ -154,11 +154,11 @@
                                                 <td>
                                                     @if ($detailed_product->product_discounts->sum('discount.percentage') > 0)
                                                         <del
-                                                            class="text-muted">{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $detailed_product->product_discounts->sum('discount.percentage')) / 100, 0, '.', ',') }}đ</del>
+                                                            class="text-muted">₹{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $detailed_product->product_discounts->sum('discount.percentage')) / 100, 0, '.', ',') }}</del>
                                                     @endif
 
                                                     <p class="text-danger m-0">
-                                                        {{ number_format($detailed_product->original_price, 0, '.', ',') }}đ
+                                                        ₹{{ number_format($detailed_product->original_price, 0, '.', ',') }}
                                                     </p>
                                                 </td>
 

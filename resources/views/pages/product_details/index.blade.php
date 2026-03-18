@@ -66,10 +66,10 @@
                                 <div class="product-details-price">
                                     @if ($discount_percentage > 0)
                                         <span class="old-price">
-                                            {{ number_format($detailed_product->original_price, 0, '.', ',') }}đ</span>
+                                            ₹{{ number_format($detailed_product->original_price, 0, '.', ',') }}</span>
                                     @endif
                                     <span class="js-unit-price new-price"
-                                        data-unit-price="{{ $detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100 }}">{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100, 0, '.', ',') }}đ</span>
+                                        data-unit-price="{{ $detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100 }}">₹{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100, 0, '.', ',') }}</span>
                                 </div>
                             </div>
                         @endforeach

@@ -40,9 +40,9 @@
                                     <h3><a href="/products/{{ $product->product_id }}">{{ $product->name }}</a></h3>
                                     <div class="product-price">
                                         <span
-                                            class="old-price">{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}đ</span>
+                                            class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>
                                         <span
-                                            class="new-price">{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}đ</span>
+                                            class="new-price">₹{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -80,9 +80,9 @@
                                     <h3><a href="/products/{{ $product->product_id }}">{{ $product->name }}</a></h3>
                                     <div class="product-price">
                                         <span
-                                            class="old-price">{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}đ</span>
+                                            class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>
                                         <span
-                                            class="new-price">{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}đ</span>
+                                            class="new-price">₹{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}</span>
                                     </div>
                                 </div>
                             </div>

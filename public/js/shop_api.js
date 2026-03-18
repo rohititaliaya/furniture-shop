@@ -235,18 +235,18 @@ jQuery(document).ready(function () {
                 ${
                     product.detailed_product.total_discount_percentage > 0
                         ? `<span class="old-price">
-                        ${formatter.format(product.detailed_product.original_price)}đ
+                        ₹${formatter.format(product.detailed_product.original_price)}
                         </span>`
                         : ''
                 } 
                 
                     <span class="new-price">
-                        ${formatter.format(
+                        ₹${formatter.format(
                             product.detailed_product.original_price -
                                 (product.detailed_product.original_price *
                                     product.detailed_product.total_discount_percentage) /
                                     100,
-                        )}đ
+                        )}
                     </span>
                 </div>
             </div>
@@ -376,9 +376,9 @@ jQuery(document).ready(function () {
         let minVal = parseInt($('.range-input input').first().val());
         let maxVal = parseInt($('.range-input input').last().val());
 
-        $('.price-input .input-min').val(formatter.format(minVal < maxVal ? minVal : maxVal) + 'đ');
+        $('.price-input .input-min').val('₹' + formatter.format(minVal < maxVal ? minVal : maxVal));
         $('.price-input .input-min').data('value', minVal < maxVal ? minVal : maxVal);
-        $('.price-input .input-max').val(formatter.format(maxVal > minVal ? maxVal : minVal) + 'đ');
+        $('.price-input .input-max').val('₹' + formatter.format(maxVal > minVal ? maxVal : minVal));
         $('.price-input .input-max').data('value', maxVal > minVal ? maxVal : minVal);
 
         let leftPercent = (minVal / parseInt($('.range-input input').first().attr('max'))) * 100;

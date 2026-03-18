@@ -63,14 +63,14 @@
                                 <strong>Paid: </strong>{{ $warranty->order->get_is_paid() }}<br>
                                 <strong>Total price:</strong>
                                 <span
-                                    class="text-success">{{ number_format(
+                                    class="text-success">₹{{ number_format(
                                         $detailed_orders->sum(function ($detailed_order) {
                                             return $detailed_order->unit_price * $detailed_order->quantities;
                                         }),
                                         0,
                                         '.',
                                         ',',
-                                    ) }}đ
+                                    ) }}
                                 </span><br>
                                 <strong>Number of products: </strong>{{ $detailed_orders->count() }}
                             </address>

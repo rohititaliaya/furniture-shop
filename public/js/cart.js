@@ -16,8 +16,8 @@ jQuery(document).ready(function () {
         $('.js-total-cart').removeClass('bg-black');
     }
     function convertCurrencyToNumber(currency) {
-        if (currency.includes(',') || currency.includes('đ')) {
-            return Number(currency.replace(/,|đ/g, ''));
+        if (currency.includes(',') || currency.includes('₹')) {
+            return Number(currency.replace(/,|₹/g, ''));
         } else {
             return Number(currency);
         }
@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
                 localStorage.setItem('cart', JSON.stringify(cart));
                 if (cart.length === 0) {
                     $('.js-mini-cart-checkout-btn').addClass('disable');
-                    $('.js-total-price').text('0đ');
+                    $('.js-total-price').text('₹0');
                 } else {
                     let html = '';
                     let total_price = 0;
@@ -54,8 +54,8 @@ jQuery(document).ready(function () {
                                     <div class="cart-title">
                                         <h4><a>${item.name}</a></h4>
                                         <span> ${item.quantities} × <span class="unit-price">${
-                            formatter.format(item.unit_price) + 'đ'
-                        }</span> </span>
+                                            '₹' + formatter.format(item.unit_price)
+                                        }</span> </span>
                                     </div>
                                 </div>
                                 <div class="cart-delete">
@@ -64,7 +64,7 @@ jQuery(document).ready(function () {
                             </li>`;
                     }
                     $('#cart-list').html(html);
-                    $('.js-total-price').text(formatter.format(total_price) + 'đ');
+                    $('.js-total-price').text('₹' + formatter.format(total_price));
                     $('.js-mini-cart-checkout-btn').removeClass('disable');
                 }
             },
@@ -97,7 +97,7 @@ jQuery(document).ready(function () {
             }
         }
         console.log(total_price);
-        $('.js-total-price').text(formatter.format(total_price) + 'đ');
+        $('.js-total-price').text('₹' + formatter.format(total_price));
     });
 
     // cart page
@@ -122,7 +122,7 @@ jQuery(document).ready(function () {
                         <p class="js-sku">${item.sku}</p>
                     </div>
                 </div>
-                <div><span class="js-unit-price">${formatter.format(item.unit_price)}đ</span></div>
+                <div><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
                 <div>
                     <div class="quantities-wrapper">
                         <button class="js-quantities-minus" ><i class="ti-minus"></i></button>
@@ -130,9 +130,9 @@ jQuery(document).ready(function () {
                         <button class="js-quantities-plus" ><i class="ti-plus"></i></button>
                     </div>
                 </div>
-                <div><span class="js-subtotal-price">${formatter.format(
+                <div><span class="js-subtotal-price">₹${formatter.format(
                     item.unit_price * item.quantities,
-                )}đ</span></div>
+                )}</span></div>
                 <div class="js-delete-cart-item delete-item"><i class="ti-close"></i></div>
                 </div>`;
             }
@@ -151,7 +151,7 @@ jQuery(document).ready(function () {
         $(this)
             .closest('.cart-item')
             .find('.js-subtotal-price')
-            .text(formatter.format(unit_price * quantities) + 'đ');
+            .text('₹' + formatter.format(unit_price * quantities));
 
         // update cart
         const sku = $(this).closest('.cart-item').find('.js-sku').text();
@@ -177,7 +177,7 @@ jQuery(document).ready(function () {
         $(this)
             .closest('.cart-item')
             .find('.js-subtotal-price')
-            .text(formatter.format(unit_price * quantities) + 'đ');
+            .text('₹' + formatter.format(unit_price * quantities));
 
         // update cart
         const sku = $(this).closest('.cart-item').find('.js-sku').text();
@@ -202,7 +202,7 @@ jQuery(document).ready(function () {
         $(this)
             .closest('.cart-item')
             .find('.js-subtotal-price')
-            .text(formatter.format(unit_price * quantities) + 'đ');
+            .text('₹' + formatter.format(unit_price * quantities));
 
         // update cart
         const sku = $(this).closest('.cart-item').find('.js-sku').text();
@@ -239,13 +239,12 @@ jQuery(document).ready(function () {
             const quantities = parseInt($(this).find('.js-cart-quantities-input').val());
             const unit_price = convertCurrencyToNumber($(this).find('.js-unit-price').text());
             html += `<div class="checkout-item" data-sku="${sku}" data-unit-price="${unit_price}" data-quantities="${quantities}">
-                        <p>x<span>${quantities}</span> <span>${name}</span></p>
-                        <p>${formatter.format(unit_price * quantities)}đ</p>
+                        <p>₹${formatter.format(unit_price * quantities)}</p>
                     </div>`;
             total_price += unit_price * quantities;
         });
         $('.js-checkout-content').html(html);
-        $('.js-cart-order-total-price').text(formatter.format(total_price) + 'đ');
+        $('.js-cart-order-total-price').text('₹' + formatter.format(total_price));
         if (cart_items.length === 0) {
             $('.js-cart-checkout-btn').addClass('disable');
         } else {
@@ -290,11 +289,11 @@ jQuery(document).ready(function () {
             total_price += subtotal_price;
             total_quantities += parseInt(item.quantities);
             $('.js-checkout-product').append(
-                `<li>x${item.quantities} ${item.name} <span>${formatter.format(subtotal_price)}đ</span></li>`,
+                `<li>x${item.quantities} ${item.name} <span>₹${formatter.format(subtotal_price)}</span></li>`,
             );
         }
         $('.js-checkout-total-product').text(total_quantities + ' products');
-        $('.js-checkout-total-price').text(formatter.format(total_price) + 'đ');
+        $('.js-checkout-total-price').text('₹' + formatter.format(total_price));
     }
     loadCheckoutProduct();
 

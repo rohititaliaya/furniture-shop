@@ -37,11 +37,11 @@
                                                     <h5>{{ $order_detail->detailed_product->name }}</h5>
                                                     <p>Phân loại hàng: bàn ghế cao cấp</p>
                                                     <span>{{ $order_detail->quantities }} x
-                                                        {{ number_format($order_detail->unit_price, 0, '.', ',') }}đ</span>
+                                                        ₹{{ number_format($order_detail->unit_price, 0, '.', ',') }}</span>
                                                 </div>
                                             </div>
                                             <div class="right">
-                                                {{ number_format($order_detail->quantities * $order_detail->unit_price, 0, '.', ',') }}đ
+                                                ₹{{ number_format($order_detail->quantities * $order_detail->unit_price, 0, '.', ',') }}
                                             </div>
                                         </div>
                                     @endforeach
@@ -51,14 +51,14 @@
                                 </div>
                                 <div class="footer">
                                     <p>Total:
-                                        <span>{{ number_format(
+                                        <span>₹{{ number_format(
                                             $order->order_details->reduce(function ($carry, $detail) {
                                                 return $carry + $detail->unit_price * $detail->quantities;
                                             }, 0),
                                             0,
                                             '.',
                                             ',',
-                                        ) }}đ</span>
+                                        ) }}</span>
                                     </p>
                                     <a href="/myorders/{{ $order->order_id }}">View details</a>
                                 </div>

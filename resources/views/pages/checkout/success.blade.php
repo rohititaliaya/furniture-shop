@@ -77,7 +77,7 @@
                                             <a
                                                 href="/products/{{ $detailed_order->detailed_product->product_id }}">{{ $detailed_order->detailed_product->name }}</a>
                                         </p>
-                                        <p>{{ number_format($detailed_order->unit_price * $detailed_order->quantities, 0, '.', ',') }}đ
+                                        <p>₹{{ number_format($detailed_order->unit_price * $detailed_order->quantities, 0, '.', ',') }}
                                         </p>
                                     </div>
                                 @endforeach
@@ -92,14 +92,14 @@
                         </div>
                         <div class="footer">
                             <h3>Total</h3>
-                            <span>{{ number_format(
+                            <span>₹{{ number_format(
                                 $order->order_details->reduce(function ($carry, $detail) {
                                     return $carry + $detail->unit_price * $detail->quantities;
                                 }, 0),
                                 0,
                                 '.',
                                 ',',
-                            ) }}đ</span>
+                            ) }}</span>
                         </div>
                     </div>
                 @else

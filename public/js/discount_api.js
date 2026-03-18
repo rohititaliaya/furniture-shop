@@ -281,7 +281,7 @@ jQuery.noConflict();
                         </td>
                         <td class="js-detailed-product-quantities">${detailed_product.quantities}</td>
                         <td class="text-danger">
-                        ${formatter.format(detailed_product.original_price)}đ
+                        ₹${formatter.format(detailed_product.original_price)}
                         </td>
                         <td>
                         <div class="custom-table-action">

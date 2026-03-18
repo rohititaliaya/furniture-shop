@@ -89,11 +89,11 @@
                                                     <div class="product-price">
                                                         @if ($detailed_product->total_discount_percentage > 0)
                                                             <span class="old-price">
-                                                                {{ number_format($detailed_product->original_price, 0, '.', ',') }}đ
+                                                                ₹{{ number_format($detailed_product->original_price, 0, '.', ',') }}
                                                             </span>
                                                         @endif
                                                         <span class="new-price">
-                                                            {{ number_format($detailed_product->original_price - ($detailed_product->original_price * $detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}đ
+                                                            ₹{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -164,11 +164,11 @@
                             <div class="price-filter">
                                 <div class="price-input">
                                     <div class="field">
-                                        <input type="text" class="input-min" value="0đ" data-value="0" readonly>
+                                        <input type="text" class="input-min" value="₹0" data-value="0" readonly>
                                     </div>
                                     <div class="separator">-</div>
                                     <div class="field">
-                                        <input type="text" class="input-max" value="60,000,000đ" data-value="60000000"
+                                        <input type="text" class="input-max" value="₹60,000,000" data-value="60000000"
                                             readonly>
                                     </div>
                                 </div>
