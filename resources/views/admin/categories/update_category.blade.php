@@ -27,7 +27,7 @@
                         <div class="mb-3">
                             <label for="parent_id" class="form-label">Parent Category</label>
                             <select id="parent_id" name="parent_id" class="form-control form-select">
-                                <option value="-1">Không</option>
+                                <option value="-1">Moodmod</option>
                             </select>
                         </div>
                     </div>

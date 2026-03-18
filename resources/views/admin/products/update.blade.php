@@ -64,6 +64,13 @@
                                         </select>
                                     </div>
                                 </div>
+                                 <div class="col-sm-6 col-md-3">
+                                    <div class="mb-3">
+                                        <label for="quantities" class="form-label">Quantities</label>
+                                        <input id="quantities" name="quantities" type="number" class="form-control"
+                                            value="{{ $product->quantities }}">
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <div class="form-label">Select multiple tags</div>

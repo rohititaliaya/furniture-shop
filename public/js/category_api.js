@@ -5,7 +5,7 @@ jQuery.noConflict();
 
         // create category
         function createCategoryElement({ category, can_update = false, can_delete = false }) {
-            let parent = 'Không';
+            let parent = 'Moodmod';
             if (category?.parent?.category_id) {
                 parent = `${category.parent.category_id} - ${category.parent.name}`;
             }
@@ -100,7 +100,7 @@ jQuery.noConflict();
                     $('#update-category-form input[name="name"]').val(response.category.name);
                     $('#update-category-form input[name="description"]').val(response.category.description);
                     $('#update-category-form input[name="index"]').val(response.category.index);
-                    let options = '<option value="-1">Không</option>';
+                    let options = '<option value="-1">Moodmod</option>';
                     response.categories.forEach((category) => {
                         if (category.category_id == response.category.parent_id) {
                             options += `<option value="${category.category_id}" selected>${category.category_id} - ${category.name}</option>`;

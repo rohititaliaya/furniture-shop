@@ -53,7 +53,7 @@
                                 <div class="mb-3">
                                     <label for="customer_id" class="form-label">Customer</label>
                                     <select id="customer_id" name="customer_id" class="form-control form-select">
-                                        <option value="-1" selected>Không
+                                        <option value="-1" selected>Moodmod
                                         </option>
                                         @foreach ($customers as $customer)
                                             <option value="{{ $customer->user_id }}">{{ $customer->email }}

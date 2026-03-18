@@ -82,6 +82,13 @@
                                             value="{{ $detailed_product->warranty_month }}" readonly>
                                     </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="quantities" class="form-label">Quantities</label>
+                                        <input id="quantities" name="quantities" type="number" class="form-control"
+                                            value="{{ $detailed_product->quantities }}" readonly>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Upload images</label>

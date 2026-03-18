@@ -22,6 +22,7 @@ class CreateDetailedProduct extends FormRequest
             'size' => 'required',
             'original_price' => 'required',
             'warranty_month' => 'required|numeric',
+            'quantities' => 'required|numeric|min:0',
         ];
     }
     public function messages()
@@ -36,6 +37,9 @@ class CreateDetailedProduct extends FormRequest
             'original_price.required' => 'The original price field is required.',
             'warranty_month.required' => 'The warranty month field is required.',
             'warranty_month.numeric' => 'The warranty month field must be a number.',
+            'quantities.required' => 'The quantities field is required.',
+            'quantities.numeric' => 'The quantities field must be a number.',
+            'quantities.min' => 'The quantities field must be at least 0.',
         ];
     }
 }

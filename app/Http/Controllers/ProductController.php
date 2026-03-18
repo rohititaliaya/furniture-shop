@@ -135,6 +135,7 @@ class ProductController extends Controller
             'category_id' => $request->input('category'),
             'brand_id' => $request->input('brand'),
             'description' => $request->input('description'),
+            'quantities' => $request->input('quantities'),
             'amount_sold' => 0,
         ]);
         // create tags
@@ -171,6 +172,7 @@ class ProductController extends Controller
                 'category_id' => $request->input('category'),
                 'brand_id' => $request->input('brand'),
                 'description' => $request->input('description'),
+                'quantities' => $request->input('quantities'),
             ]);
         }
         // update tags
@@ -235,7 +237,7 @@ class ProductController extends Controller
             'original_price' => $request->input('original_price'),
             'warranty_month' => $request->input('warranty_month'),
             'description' => $request->input('description') ?? '',
-            'quantities' => 0
+            'quantities' => $request->input('quantities')
         ]);
         $count = 0;
         while ($request->hasFile('image' . $count)) {
@@ -287,6 +289,7 @@ class ProductController extends Controller
             'original_price' => $request->input('original_price'),
             'warranty_month' => $request->input('warranty_month'),
             'description' => $request->input('description') ?? '',
+            'quantities' => $request->input('quantities'),
         ]);
         // handle images update here
         $old_images =  explode(',', $request->input('old_images'));

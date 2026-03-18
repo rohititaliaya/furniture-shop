@@ -64,7 +64,7 @@
                                                 @if (isset($category->parent->category_id))
                                                     {{ $category->parent->category_id . ' - ' . $category->parent->name }}
                                                 @else
-                                                    Không
+                                                    Moodmod
                                                 @endif
                                             </td>
                                             <td>

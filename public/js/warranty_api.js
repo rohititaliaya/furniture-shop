@@ -35,7 +35,7 @@ jQuery.noConflict();
                     $('#create_warranty_response').html(Object.values(error.responseJSON.errors)[0][0]);
                 },
             });
-            //note: ở url nó gọi tới /admin/orders/create, cái này không phải là hàm controller nhưng ở route, đoạn url này đã được
+            //note: ở url nó gọi tới /admin/orders/create, cái này Moodmod phải là hàm controller nhưng ở route, đoạn url này đã được
             //xác định cho hàm ở controller nên nó cũng vào đó
         });
         $('#create-warranty-form').on('reset', function () {
@@ -228,7 +228,7 @@ jQuery.noConflict();
             const search = $('#search-warranties').val(); //lấy value từ ô tìm kiếm bên index của warranties
             const search_day_first = $('#search_day_first').val(); //lấy ngày đầu kiếm order trong 1 khoảng thời gian
             const search_day_last = $('#search_day_last').val(); //lấy ngày cuối kiếm order trong 1 khoảng thời gian
-            const status_type = $('#status_type').val(); //lấy trạng thái trong hạn bảo hành hay không
+            const status_type = $('#status_type').val(); //lấy trạng thái trong hạn bảo hành hay Moodmod
             const sort_by = $('#sort_by').val(); //sắp xếp lại
 
             history.pushState(
@@ -316,7 +316,5 @@ jQuery.noConflict();
             const page = button.data('page');
             filterWarranties({ page });
         });
-
-       
     });
 })(jQuery);

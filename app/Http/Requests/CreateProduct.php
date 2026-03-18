@@ -20,6 +20,7 @@ class CreateProduct extends FormRequest
             'category' => 'required|exists:categories,category_id',
             'brand' => 'required|exists:brands,brand_id',
             'description' => 'required',
+            'quantities' => 'required|numeric|min:0',
         ];
     }
     public function messages()
@@ -32,6 +33,9 @@ class CreateProduct extends FormRequest
             'brand.required' => 'The brand field is required.',
             'brand.exists' => 'The brand doesnt exist.',
             'description.required' => 'The description field is required.',
+            'quantities.required' => 'The quantities field is required.',
+            'quantities.numeric' => 'The quantities field must be a number.',
+            'quantities.min' => 'The quantities field must be at least 0.',
         ];
     }
 }
