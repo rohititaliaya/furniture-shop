@@ -32,8 +32,8 @@
     <div class="container">
         <div class="bg-img bg-padding-1" style="background-image:url({{ asset('images/bg/bg-1.png') }})">
             <div class="banner-content-4">
-                <h2>New Dining <br>Chair Set</h2>
-                <h3>Up To 30% Off</h3>
+                <h2 class="">New <br>Chair Set</h2>
+                <h3 class="">Up To 30% Off</h3>
                 <div class="btn-style-2 btn-hover">
                     <a href="/products/1" class="btn">
                         Shop Now

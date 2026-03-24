@@ -9,7 +9,7 @@
                             <div class="col-12 hm2-slider-animation">
                                 <div class="slider-content-2 slider-animated-3">
                                     <h3 class="animated">Up To 40% Off</h3>
-                                    <h1 class="animated">Summer <br>Collection</h1>
+                                    <h1 class="animated">Crafted Heritage <br>in Every Curve</h1>
                                     <div class="slider-btn-2 btn-hover">
                                         <a href="/shop" class="btn hover-border-radius theme-color animated">
                                             Shop Now
@@ -29,7 +29,7 @@
                             <div class="col-12 hm2-slider-animation">
                                 <div class="slider-content-2 slider-animated-3">
                                     <h3 class="animated">Up To 40% Off</h3>
-                                    <h1 class="animated">Summer <br>Collection</h1>
+                                    <h1 class="animated">Heritage. Comfort. <br> Enduring Elegance.</h1>
                                     <div class="slider-btn-2 btn-hover">
                                         <a href="/shop" class="btn hover-border-radius theme-color animated">
                                             Shop Now
@@ -49,7 +49,7 @@
                             <div class="col-12 hm2-slider-animation">
                                 <div class="slider-content-2 slider-animated-3">
                                     <h3 class="animated">Up To 40% Off</h3>
-                                    <h1 class="animated">Summer <br>Collection</h1>
+                                    <h1 class="animated">The Soul of Kerala <br>in Every Curve</h1>
                                     <div class="slider-btn-2 btn-hover">
                                         <a href="/shop" class="btn hover-border-radius theme-color animated">
                                             Shop Now
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-slide">
+            {{-- <div class="swiper-slide">
                 <div class="intro-section slider-height-1 slider-content-center bg-img single-animation-wrap slider-bg-color-3"
                     style="background-image:url({{ asset('images/slider/slider-4.jpg') }})">
                     <div class="container">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="home-slider-prev2 main-slider-nav2"><i class="fa fa-angle-left"></i></div>
             <div class="home-slider-next2 main-slider-nav2"><i class="fa fa-angle-right"></i></div>
         </div>

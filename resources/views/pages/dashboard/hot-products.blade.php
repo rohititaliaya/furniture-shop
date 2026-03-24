@@ -17,7 +17,7 @@
                             <div class="product-wrap mb-35">
                                 <div class="custom-product-img  product-img img-zoom mb-25">
                                     <a href="/products/{{ $product->product_id }}">
-                                        <img src="{{ $product->detailed_product->image }}" alt="">
+                                        <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
                                     <div class="product-badge badge-top badge-right badge-pink">
                                         <span>{{ $product->detailed_product->total_discount_percentage != 0 ? '-' . $product->detailed_product->total_discount_percentage . '%' : '' }}</span>
@@ -57,7 +57,7 @@
                             <div class="product-wrap mb-35">
                                 <div class="custom-product-img  product-img img-zoom mb-25">
                                     <a href="/products/{{ $product->product_id }}">
-                                        <img src="{{ $product->detailed_product->image }}" alt="">
+                                        <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
                                     <div class="product-badge badge-top badge-right badge-pink">
                                         <span>{{ $product->detailed_product->total_discount_percentage != 0 ? '-' . $product->detailed_product->total_discount_percentage . '%' : '' }}</span>
@@ -88,7 +88,6 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
