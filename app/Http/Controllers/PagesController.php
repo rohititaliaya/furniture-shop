@@ -359,6 +359,22 @@ class PagesController extends Controller
         return view('pages.account.index', $data);
     }
 
+    public function privacy_policy()
+    {
+        $data = [
+            'page' => 'Privacy Policy'
+        ];
+        return view('pages.privacy_policy.index', $data);
+    }
+
+    public function terms_and_conditions()
+    {
+        $data = [
+            'page' => 'Terms & Conditions'
+        ];
+        return view('pages.terms_and_conditions.index', $data);
+    }
+
     public function change_password()
     {
         return view('auth.change-password');

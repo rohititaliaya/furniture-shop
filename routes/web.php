@@ -64,6 +64,8 @@ Route::middleware([PublicMiddleware::class])->group(function () {
     Route::get('/shop', [PagesController::class, 'shop'])->name('shop');
     Route::get('/about', [PagesController::class, 'about']);
     Route::get('/contact', [PagesController::class, 'contact']);
+    Route::get('/privacy-policy', [PagesController::class, 'privacy_policy']);
+    Route::get('/terms-and-conditions', [PagesController::class, 'terms_and_conditions']);
     // products api
     Route::get('/products/{product_id}', [PagesController::class, 'product_details']);
     Route::get('/products', [ProductController::class, 'get_products']); // => json
