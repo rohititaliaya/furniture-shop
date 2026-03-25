@@ -7,7 +7,7 @@
                     <div class="banner-content-2">
                         <span>Sale 30%</span>
                         <h2>New Furniture</h2>
-                        <p>Lorem ipsum dolor sit amet consecte adipisicing elit sed do</p>
+                        <p>Easy Chair: Enchanting Kerala Series.  Enchanting Kerala Some chairs hold you</p>
                         <div class="btn-style-2 btn-hover">
                             <a href="/shop" class="btn">
                                 Shop Now
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-5">
-                <div class="banner-wrap mb-30">
+                <div class="banner-wrap bg-gray-4 mb-30" style="">
                     <a href="/products/1"><img src="{{ asset('images/banner/banner-5.png') }}" alt=""></a>
                     <div class="banner-content-3">
                         <h3>Up To 30% <img src="{{ asset('images/icon-img/sale.png') }}" alt=""> Every Item
