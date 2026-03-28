@@ -11,10 +11,8 @@
                         </div>
                         <p>Elevate your living space with our premium furniture collection. Quality, comfort, and style in every piece.</p>
                         <div class="footer-social mt-20">
-                            <a href="#" class="me-3"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="me-3"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="me-3"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="https://www.facebook.com/mooodmod" class="me-3"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/moodmodfurniture/"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

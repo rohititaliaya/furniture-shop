@@ -31,6 +31,6 @@
     </div>
     <div class="map pt-120" data-aos="fade-up" data-aos-delay="200">
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d317718.69319292053!2d-0.3817765050863085!3d51.528307984912544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sin!4v1463669021863"></iframe>
+            src="https://maps.google.com/maps?q=189%2F15%2C%20nr.%20Pazhassi%20East%20LP%20School%2C%20Mattannur%2C%20Kannur%2C%20Kerala%20670702&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
     </div>
 @endsection
