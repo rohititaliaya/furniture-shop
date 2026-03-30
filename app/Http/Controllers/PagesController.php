@@ -510,8 +510,8 @@ class PagesController extends Controller
                     $item->unit_price = $detailed_product->original_price -  $detailed_product->original_price * $total_discount_percentage / 100;
                 }
                 $item->name = $detailed_product->name;
-                $item->image = $detailed_product->images->first()->url ?? asset('images/default/default_product.jpg');
-                $new_cart[] = $item;
+                $item->image = $detailed_product->images->first()?->url ?? asset('images/default/default_product.jpg');
+                $new_cart[] = (array) $item;
             }
         }
 

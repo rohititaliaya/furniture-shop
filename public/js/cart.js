@@ -44,7 +44,7 @@ jQuery(document).ready(function () {
                     let html = '';
                     let total_price = 0;
                     for (let i = 0; i < cart.length; i++) {
-                        item = cart[i];
+                        let item = cart[i];
                         total_price += item.unit_price * item.quantities;
                         html += `<li>
                                 <div class="cart-item-info">
@@ -92,7 +92,7 @@ jQuery(document).ready(function () {
                 </div>`);
         } else {
             for (let i = 0; i < newCart.length; i++) {
-                item = newCart[i];
+                let item = newCart[i];
                 total_price += item.unit_price * item.quantities;
             }
         }
