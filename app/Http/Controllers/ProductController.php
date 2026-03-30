@@ -235,6 +235,7 @@ class ProductController extends Controller
             'color_id' => $request->input('color_id'),
             'size' => $request->input('size'),
             'original_price' => $request->input('original_price'),
+            'discount_price' => $request->input('discount_price'),
             'warranty_month' => $request->input('warranty_month'),
             'description' => $request->input('description') ?? '',
             'quantities' => $request->input('quantities')
@@ -287,6 +288,7 @@ class ProductController extends Controller
             'color_id' => $request->input('color_id'),
             'size' => $request->input('size'),
             'original_price' => $request->input('original_price'),
+            'discount_price' => $request->input('discount_price'),
             'warranty_month' => $request->input('warranty_month'),
             'description' => $request->input('description') ?? '',
             'quantities' => $request->input('quantities'),

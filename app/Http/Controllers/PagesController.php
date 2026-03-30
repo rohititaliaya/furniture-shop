@@ -30,8 +30,8 @@ class PagesController extends Controller
             'product_images.url',
             'percentage',
             DB::raw('round(product_details.original_price,0) AS old_price'),
-            DB::raw('round(product_details.original_price * (1 - discounts.percentage/100),0) AS new_price'),
-            DB::raw('round(discounts.percentage,0) AS discount_percent'),
+            DB::raw('round(COALESCE(product_details.discount_price, product_details.original_price * (1 - discounts.percentage/100)),0) AS new_price'),
+            DB::raw('round(COALESCE((1 - product_details.discount_price / product_details.original_price) * 100, discounts.percentage),0) AS discount_percent'),
         ])
             ->distinct()
             ->join('product_details', 'products.product_id', '=', 'product_details.product_id')
@@ -65,14 +65,20 @@ class PagesController extends Controller
 
         $latest_products = $query->orderByDesc('created_at')->paginate(8);
         foreach ($latest_products as $product) {
-            $total_discount_percentage = 0;
             foreach ($product->detailed_products as $detailed_product) {
-                foreach ($detailed_product->product_discounts as $product_discount) {
-                    if ($product_discount->discount->is_currently_active()) {
-                        $total_discount_percentage += $product_discount->discount->percentage;
+                if ($detailed_product->discount_price !== null) {
+                    $detailed_product->total_discount_percentage = round((1 - $detailed_product->discount_price / $detailed_product->original_price) * 100, 0);
+                    $detailed_product->new_price = $detailed_product->discount_price;
+                } else {
+                    $total_discount_percentage = 0;
+                    foreach ($detailed_product->product_discounts as $product_discount) {
+                        if ($product_discount->discount->is_currently_active()) {
+                            $total_discount_percentage += $product_discount->discount->percentage;
+                        }
                     }
+                    $detailed_product->total_discount_percentage = $total_discount_percentage;
+                    $detailed_product->new_price = $detailed_product->original_price * (1 - $total_discount_percentage / 100);
                 }
-                $detailed_product->total_discount_percentage = $total_discount_percentage;
             }
         }
 
@@ -115,14 +121,20 @@ class PagesController extends Controller
 
         $best_seller_products = $query->orderByDesc('amount_sold')->paginate(8);
         foreach ($best_seller_products as $product) {
-            $total_discount_percentage = 0;
             foreach ($product->detailed_products as $detailed_product) {
-                foreach ($detailed_product->product_discounts as $product_discount) {
-                    if ($product_discount->discount->is_currently_active()) {
-                        $total_discount_percentage += $product_discount->discount->percentage;
+                if ($detailed_product->discount_price !== null) {
+                    $detailed_product->total_discount_percentage = round((1 - $detailed_product->discount_price / $detailed_product->original_price) * 100, 0);
+                    $detailed_product->new_price = $detailed_product->discount_price;
+                } else {
+                    $total_discount_percentage = 0;
+                    foreach ($detailed_product->product_discounts as $product_discount) {
+                        if ($product_discount->discount->is_currently_active()) {
+                            $total_discount_percentage += $product_discount->discount->percentage;
+                        }
                     }
+                    $detailed_product->total_discount_percentage = $total_discount_percentage;
+                    $detailed_product->new_price = $detailed_product->original_price * (1 - $total_discount_percentage / 100);
                 }
-                $detailed_product->total_discount_percentage = $total_discount_percentage;
             }
         }
 
@@ -236,14 +248,20 @@ class PagesController extends Controller
         }
         $products = $query->paginate(9); // 9 elements per page
         foreach ($products as $product) {
-            $total_discount_percentage = 0;
             foreach ($product->detailed_products as $detailed_product) {
-                foreach ($detailed_product->product_discounts as $product_discount) {
-                    if ($product_discount->discount->is_currently_active()) {
-                        $total_discount_percentage += $product_discount->discount->percentage;
+                if ($detailed_product->discount_price !== null) {
+                    $detailed_product->total_discount_percentage = round((1 - $detailed_product->discount_price / $detailed_product->original_price) * 100, 0);
+                    $detailed_product->new_price = $detailed_product->discount_price;
+                } else {
+                    $total_discount_percentage = 0;
+                    foreach ($detailed_product->product_discounts as $product_discount) {
+                        if ($product_discount->discount->is_currently_active()) {
+                            $total_discount_percentage += $product_discount->discount->percentage;
+                        }
                     }
+                    $detailed_product->total_discount_percentage = $total_discount_percentage;
+                    $detailed_product->new_price = $detailed_product->original_price * (1 - $total_discount_percentage / 100);
                 }
-                $detailed_product->total_discount_percentage = $total_discount_percentage;
             }
         }
 
@@ -308,10 +326,24 @@ class PagesController extends Controller
     {
         $product_id = request()->route('product_id');
         $product = Product::with(['category', 'brand', 'product_tags.tag', 'detailed_products' => function ($query) {
-            $query->where('is_deleted', 0);
+            $query->where('is_deleted', 0)->with('images', 'color', 'product_discounts.discount');
         }])
             ->where('is_deleted', false)->where('product_id', $product_id)->first();
         if ($product) {
+            foreach ($product->detailed_products as $detailed_product) {
+                if ($detailed_product->discount_price !== null) {
+                    $detailed_product->p_discount_percentage = round((1 - $detailed_product->discount_price / $detailed_product->original_price) * 100, 0);
+                    $detailed_product->new_price = $detailed_product->discount_price;
+                } else {
+                    $today = now();
+                    $discount_percentage = $detailed_product->product_discounts
+                        ->where('discount.start_date', '<=', $today)
+                        ->where('discount.end_date', '>=', $today)
+                        ->sum('discount.percentage');
+                    $detailed_product->p_discount_percentage = $discount_percentage;
+                    $detailed_product->new_price = $detailed_product->original_price * (1 - $discount_percentage / 100);
+                }
+            }
             $data = [
                 'page' => 'Product Details',
                 'product' => $product,
@@ -466,16 +498,17 @@ class PagesController extends Controller
         foreach ($cart as $item) {
             $detailed_product = ProductDetail::where('sku', $item->sku)->with('images', 'product_discounts.discount')->first();
             if ($detailed_product) {
-                $total_discount_percentage = 0;
-                foreach ($detailed_product->product_discounts as $product_discount) {
-                    if ($product_discount->discount->is_currently_active()) {
-                        $total_discount_percentage += $product_discount->discount->percentage;
+                if ($detailed_product->discount_price !== null) {
+                    $item->unit_price = $detailed_product->discount_price;
+                } else {
+                    $total_discount_percentage = 0;
+                    foreach ($detailed_product->product_discounts as $product_discount) {
+                        if ($product_discount->discount->is_currently_active()) {
+                            $total_discount_percentage += $product_discount->discount->percentage;
+                        }
                     }
+                    $item->unit_price = $detailed_product->original_price -  $detailed_product->original_price * $total_discount_percentage / 100;
                 }
-                if (isset($detailed_product->images->first()->url)) {
-                    $item->image = $detailed_product->images->first()->url;
-                }
-                $item->unit_price = $detailed_product->original_price -  $detailed_product->original_price * $total_discount_percentage / 100;
                 $item->name = $detailed_product->name;
                 $new_cart[] = $item;
             }

@@ -42,7 +42,7 @@
                                         <span
                                             class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>
                                         <span
-                                            class="new-price">₹{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}</span>
+                                            class="new-price">₹{{ number_format($product->detailed_product->new_price, 0, '.', ',') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                         <span
                                             class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>
                                         <span
-                                            class="new-price">₹{{ number_format($product->detailed_product->original_price - ($product->detailed_product->original_price * $product->detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}</span>
+                                            class="new-price">₹{{ number_format($product->detailed_product->new_price, 0, '.', ',') }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -11,7 +11,7 @@
                         <a href="/shop"><img src="{{ asset('images/banner/banner-1.png') }}" alt=""></a>
                         <div class="banner-content-1">
                             <h5>new arrival</h5>
-                            <h3>Office Chair</h3>
+                            <h3>Coffee Table</h3>
                             <div class="banner-btn">
                                 <a href="/shop">Shop Now</a>
                             </div>
@@ -23,7 +23,7 @@
                         <a href="/shop"><img src="{{ asset('images/banner/banner-2.png') }}" alt=""></a>
                         <div class="banner-content-1">
                             <h5>new arrival</h5>
-                            <h3>Hanging Chair</h3>
+                            <h3>Coffee table</h3>
                             <div class="banner-btn">
                                 <a href="/shop">Shop Now</a>
                             </div>
@@ -35,7 +35,7 @@
                         <a href="/shop"><img src="{{ asset('images/banner/banner-3.png') }}" alt=""></a>
                         <div class="banner-content-1">
                             <h5>new arrival</h5>
-                            <h3>Folding Chair</h3>
+                            <h3>Coffee Table</h3>
                             <div class="banner-btn">
                                 <a href="/shop">Shop Now</a>
                             </div>

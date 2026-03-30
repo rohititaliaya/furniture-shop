@@ -93,7 +93,7 @@
                                                             </span>
                                                         @endif
                                                         <span class="new-price">
-                                                            ₹{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $detailed_product->total_discount_percentage) / 100, 0, '.', ',') }}
+                                                            ₹{{ number_format($detailed_product->new_price, 0, '.', ',') }}
                                                         </span>
                                                     </div>
                                                 </div>

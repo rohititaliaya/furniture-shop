@@ -81,6 +81,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
+                                        <label for="discount_price" class="form-label">Discount Price</label>
+                                        <input id="discount_price" name="discount_price" type="number" class="form-control"
+                                            placeholder="1000000" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
                                         <label for="warranty_month" class="form-label">Warranty Month</label>
                                         <input id="warranty_month" name="warranty_month" type="number" class="form-control"
                                             placeholder="6" value="">

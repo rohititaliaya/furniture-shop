@@ -56,33 +56,19 @@
                                 class="js-product-name-price {{ $detailed_product->sku }} @if (!$loop->first) d-none @endif">
                                 <h2 class="js-product-name">{{ $detailed_product->name }} </h2>
 
-                                @php
-                                    $today = now();
-                                    $discount_percentage = $detailed_product->product_discounts
-                                        ->where('discount.start_date', '<=', $today)
-                                        ->where('discount.end_date', '>=', $today)
-                                        ->sum('discount.percentage');
-                                @endphp
                                 <div class="product-details-price">
-                                    @if ($discount_percentage > 0)
+                                    @if ($detailed_product->p_discount_percentage > 0)
                                         <span class="old-price">
                                             ₹{{ number_format($detailed_product->original_price, 0, '.', ',') }}</span>
                                     @endif
                                     <span class="js-unit-price new-price"
-                                        data-unit-price="{{ $detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100 }}">₹{{ number_format($detailed_product->original_price - ($detailed_product->original_price * $discount_percentage) / 100, 0, '.', ',') }}</span>
+                                        data-unit-price="{{ $detailed_product->new_price }}">₹{{ number_format($detailed_product->new_price, 0, '.', ',') }}</span>
                                 </div>
                             </div>
                         @endforeach
                         {{-- temporary custom  --}}
                         <div class="d-flex my-4 " style="flex-wrap: wrap;">
                             @foreach ($product->detailed_products as $dt_product)
-                                @php
-                                    $today = now();
-                                    $discount_percentage = $dt_product->product_discounts
-                                        ->where('discount.start_date', '<=', $today)
-                                        ->where('discount.end_date', '>=', $today)
-                                        ->sum('discount.percentage');
-                                @endphp
                                 <div class="detailed-product-tag @if ($loop->first) active @endif
                                 @if ($dt_product->quantities == 0) disable @endif"
                                     data-sku="{{ $dt_product->sku }}" data-id="{{ $product->product_id }}">
@@ -90,8 +76,8 @@
                                         style="width: 40px; height: 40px;">
                                     <span>C: {{ $dt_product->color->name }}</span>
                                     <span>S: {{ $dt_product->size }}</span>
-                                    @if ($discount_percentage > 0)
-                                        <span class="text-danger">-{{ $discount_percentage }}%</span>
+                                    @if ($dt_product->p_discount_percentage > 0)
+                                        <span class="text-danger">-{{ $dt_product->p_discount_percentage }}%</span>
                                     @endif
 
                                 </div>
