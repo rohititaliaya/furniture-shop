@@ -29,12 +29,25 @@
                                                     value="{{ Auth::user()->default_address->phone_number }}" readonly>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-4 col-md-4">
                                             <div class="billing-info mb-20">
-                                                <label>Street Address <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input id="address" class="billing-address" type="text" name="address"
-                                                    value="{{ Auth::user()->default_address->address }}" readonly>
+                                                <label>State <abbr class="required" title="required">*</abbr></label>
+                                                <input id="state" type="text" name="state"
+                                                    value="{{ Auth::user()->default_address->state }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="billing-info mb-20">
+                                                <label>City <abbr class="required" title="required">*</abbr></label>
+                                                <input id="city" type="text" name="city"
+                                                    value="{{ Auth::user()->default_address->city }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="billing-info mb-20">
+                                                <label>Pincode <abbr class="required" title="required">*</abbr></label>
+                                                <input id="pincode" type="text" name="pincode"
+                                                    value="{{ Auth::user()->default_address->pincode }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -68,7 +81,30 @@
                                                 <label>Street Address <abbr class="required"
                                                         title="required">*</abbr></label>
                                                 <input id="address" class="billing-address" type="text" name="address"
-                                                    value="" placeholder="">
+                                                    value="" placeholder="House number, Street name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="billing-info mb-20">
+                                                <label>State <abbr class="required" title="required">*</abbr></label>
+                                                <select id="state" name="state" class="form-control">
+                                                    <option value="">Select State</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="billing-info mb-20">
+                                                <label>City <abbr class="required" title="required">*</abbr></label>
+                                                <select id="city" name="city" class="form-control">
+                                                    <option value="">Select City</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="billing-info mb-20">
+                                                <label>Pincode <abbr class="required" title="required">*</abbr></label>
+                                                <input id="pincode" type="text" name="pincode" value=""
+                                                    placeholder="Pincode">
                                             </div>
                                         </div>
 

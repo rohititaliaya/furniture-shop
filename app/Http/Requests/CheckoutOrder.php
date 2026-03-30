@@ -17,6 +17,9 @@ class CheckoutOrder extends FormRequest
         return [
             'receiver_name' => 'required',
             'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required|numeric',
             'phone_number' => ['required', 'regex:/^[6-9][0-9]{9}$/'],
             'payment_method' => 'required',
         ];

@@ -331,15 +331,17 @@ class OrderController extends Controller
 
         // create order
         $order = Order::create([
+            'receiver_name' => $request->input('receiver_name'),
+            'address' => $request->input('address'),
+            'state' => $request->input('state'),
+            'city' => $request->input('city'),
+            'pincode' => $request->input('pincode'),
+            'phone_number' => $request->input('phone_number'),
+            'customer_id' => Auth::id(),
             'total_price' => 0,
             'is_paid' => false,
             'status' => 0,
-            'receiver_name' => $request->input('receiver_name'),
-            'address' => $request->input('address'),
-            'phone_number' => $request->input('phone_number'),
             'note' => $request->input('note'),
-            'customer_id' => Auth::user()->user_id,
-            'created_by' => null,
         ]);
 
         // create order detail

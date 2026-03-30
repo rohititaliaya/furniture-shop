@@ -22,6 +22,48 @@ jQuery(document).ready(function () {
             return Number(currency);
         }
     }
+    let IndianStatesDistricts = [];
+
+    function loadStates() {
+        $.getJSON('/india-states-districts-latest.json', function (data) {
+            IndianStatesDistricts = data;
+            const stateSelect = $('#state');
+            if (stateSelect.is('select')) {
+                stateSelect.empty().append('<option value="">Select State</option>');
+                data.forEach(function (item) {
+                    stateSelect.append(`<option value="${item.state}">${item.state}</option>`);
+                });
+                stateSelect.select2({
+                    placeholder: "Select State",
+                    allowClear: true
+                });
+                $('#city').select2({
+                    placeholder: "Select City",
+                    allowClear: true
+                });
+            }
+        });
+    }
+
+    $(document).on('select2:select', '#state', function (e) {
+        const stateName = e.params.data.id;
+        const citySelect = $('#city');
+        if (citySelect.is('select')) {
+            citySelect.empty().append('<option value="">Select City</option>');
+            if (stateName) {
+                const stateObj = IndianStatesDistricts.find(s => s.state === stateName);
+                if (stateObj && stateObj.districts) {
+                    stateObj.districts.forEach(function (district) {
+                        citySelect.append(`<option value="${district}">${district}</option>`);
+                    });
+                }
+            }
+            citySelect.trigger('change');
+        }
+    });
+
+    loadStates();
+
     let formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 0,
     });
@@ -121,22 +163,22 @@ jQuery(document).ready(function () {
                         let item = cart[i];
                         html += `<div class="js-cart-item cart-item">
                         <div class="product-cart-item">
-                            <input class="js-check-cart-item" type="checkbox" name="" id="">
+                            <input class="js-check-cart-item" type="checkbox" name="" id="" checked>
                             <img src="${item.image}" alt="">
                             <div class="info">
                                 <p> ${item.name} </p>
                                 <p class="js-sku">${item.sku}</p>
                             </div>
                         </div>
-                        <div><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
-                        <div>
+                        <div data-label="Unit Price"><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
+                        <div data-label="Quantities">
                             <div class="quantities-wrapper">
                                 <button class="js-quantities-minus" ><i class="ti-minus"></i></button>
                                 <input class="js-cart-quantities-input" type="number" value="${item.quantities}">
                                 <button class="js-quantities-plus" ><i class="ti-plus"></i></button>
                             </div>
                         </div>
-                        <div><span class="js-subtotal-price">₹${formatter.format(
+                        <div data-label="Total Price"><span class="js-subtotal-price">₹${formatter.format(
                             item.unit_price * item.quantities,
                         )}</span></div>
                         <div class="js-delete-cart-item delete-item"><i class="ti-close"></i></div>

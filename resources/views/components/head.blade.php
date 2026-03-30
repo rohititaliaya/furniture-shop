@@ -38,4 +38,6 @@
 
     {{-- Fontaw --}}
     <script src="{{ asset('js/vendor/fontawesome.js') }}" crossorigin="anonymous"></script>
+
+    @stack('styles')
 </head>

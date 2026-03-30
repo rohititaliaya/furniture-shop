@@ -36,6 +36,9 @@ class AddressController extends Controller
             $address->update([
                 'receiver_name' => $request->input('receiver_name'),
                 'address' => $request->input("address"),
+                'state' => $request->input("state"),
+                'city' => $request->input("city"),
+                'pincode' => $request->input("pincode"),
                 'phone_number' => $request->input('phone_number'),
             ]);
             return ['message' => 'Updateted address  successfully!', 'address' => $address];
@@ -53,6 +56,9 @@ class AddressController extends Controller
         $address = Address::create([
             'receiver_name' => $request->input('receiver_name'),
             'address' => $request->input("address"),
+            'state' => $request->input("state"),
+            'city' => $request->input("city"),
+            'pincode' => $request->input("pincode"),
             'phone_number' => $request->input('phone_number'),
             'is_default' => 0,
             'user_id' => $user_id,

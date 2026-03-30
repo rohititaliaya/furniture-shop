@@ -10,5 +10,5 @@ class Address extends Model
     use HasFactory;
     protected $table = 'address';
     protected $primaryKey = 'address_id';
-    protected $fillable = ['user_id', 'receiver_name', 'address', 'phone_number', 'is_default'];
+    protected $fillable = ['user_id', 'receiver_name', 'address', 'state', 'city', 'pincode', 'phone_number', 'is_default'];
 }

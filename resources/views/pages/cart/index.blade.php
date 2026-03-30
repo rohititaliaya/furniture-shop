@@ -1,11 +1,14 @@
 @extends('layouts.app')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/cart_mobile.css') }}">
+@endpush
 @section('content')
     {{-- Head banner --}}
     @include('components.head-banner')
     <div class="cart-area pt-100 pb-100">
         <div class="container">
             <div class="row">
-                <div id="cart-section" class="col-8">
+                <div id="cart-section" class="col-lg-8 col-md-12 col-12">
                     <div class="cart-header">
                         <div><span>Product</span></div>
                         <div><span>Unit price</span></div>

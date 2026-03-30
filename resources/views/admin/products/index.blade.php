@@ -102,6 +102,7 @@
                                         <th>#</th>
                                         <th>Product</th>
                                         <th>Average Price</th>
+                                        <th>Discount Price</th>
                                         <th>Quantities</th>
                                         <th>Brand</th>
                                         <th>Category</th>
@@ -151,6 +152,12 @@
 
                                                 <td class="text-danger">
                                                     ₹{{ number_format($product->detailed_products->avg('original_price'), 0, '.', ',') }}
+                                                </td>
+                                                <td class="text-success">
+                                                    @php
+                                                        $avgDiscountPrice = $product->detailed_products->whereNotNull('discount_price')->avg('discount_price');
+                                                    @endphp
+                                                    {{ $avgDiscountPrice ? '₹' . number_format($avgDiscountPrice, 0, '.', ',') : '-' }}
                                                 </td>
                                                 <td>{{ $product->detailed_products->sum('quantities') }}</td>
 

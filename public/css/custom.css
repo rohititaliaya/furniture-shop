@@ -97,6 +97,7 @@ body::-webkit-scrollbar-track {
 /* Firefox */
 .select-quantities-wrapper input[type='number'] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .cart-content .empty-cart {
@@ -276,6 +277,7 @@ body::-webkit-scrollbar-track {
 /* Firefox */
 #cart-section .cart-item .quantities-wrapper input[type='number'] {
     -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 #cart-section .cart-item .delete-item {
@@ -1435,4 +1437,28 @@ h1.custom-title-font {
 }
 .avatar-update-wrapper input {
     display: none;
+}
+/* Select2 custom styling to match theme */
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    height: 48px !important;
+    display: flex;
+    align-items: center;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: normal !important;
+    padding-left: 12px !important;
+    color: #333 !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 46px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #999;
+}
+.select2-dropdown {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    z-index: 9999;
 }

@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
                 <p class="receiver-name">${address.receiver_name}</p>
                 <p>${address.phone_number}</p>
             </div>
-            <p>${address.address}</p>
+            <p>${address.address}, ${address.city}, ${address.state} - ${address.pincode}</p>
             ${address.is_default ? '<div class="default-tag">Default</div>' : ''}
         </div>
         <div class="address-action">
@@ -39,6 +39,9 @@ jQuery(document).ready(function () {
                 data-address-id="${address.address_id}"
                 data-receiver-name="${address.receiver_name}"
                 data-address="${address.address}"
+                data-state="${address.state}"
+                data-city="${address.city}"
+                data-pincode="${address.pincode}"
                 data-phone-number="${address.phone_number}"
                 data-is-default="${address.is_default}"><i
                     class="fa fa-edit"></i> Update</button>
@@ -133,8 +136,19 @@ jQuery(document).ready(function () {
         modal.find('#address_id').val(button.data('address-id'));
         modal.find('#receiver_name').val(button.data('receiver-name'));
         modal.find('#address').val(button.data('address'));
+        modal.find('#pincode').val(button.data('pincode'));
         modal.find('#phone_number').val(button.data('phone-number'));
         modal.find('#is_default').attr('checked', button.data('is-default'));
+
+        const stateName = button.data('state');
+        const cityName = button.data('city');
+        const stateSelect = modal.find('#state');
+        const citySelect = modal.find('#city');
+
+        stateSelect.val(stateName).trigger('change.select2');
+        setTimeout(() => {
+            citySelect.val(cityName).trigger('change.select2');
+        }, 100);
     });
     $('#CreateAddressModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -167,4 +181,53 @@ jQuery(document).ready(function () {
             },
         });
     });
+
+    let IndianStatesDistricts = [];
+
+    function loadStatesForModals() {
+        $.getJSON('/india-states-districts-latest.json', function (data) {
+            IndianStatesDistricts = data;
+            const stateSelects = $('#CreateAddressModal #state, #UpdateAddressModal #state');
+            stateSelects.each(function () {
+                const select = $(this);
+                select.empty().append('<option value="">Select State</option>');
+                data.forEach(function (item) {
+                    select.append(`<option value="${item.state}">${item.state}</option>`);
+                });
+                select.select2({
+                    dropdownParent: select.closest('.modal'),
+                    placeholder: "Select State",
+                    allowClear: true,
+                    width: '100%'
+                });
+            });
+            $('#CreateAddressModal #city, #UpdateAddressModal #city').each(function () {
+                const select = $(this);
+                select.select2({
+                    dropdownParent: select.closest('.modal'),
+                    placeholder: "Select City",
+                    allowClear: true,
+                    width: '100%'
+                });
+            });
+        });
+    }
+
+    $(document).on('select2:select', '#CreateAddressModal #state, #UpdateAddressModal #state', function (e) {
+        const stateName = e.params.data.id;
+        const modal = $(this).closest('.modal');
+        const citySelect = modal.find('#city');
+        citySelect.empty().append('<option value="">Select City</option>');
+        if (stateName) {
+            const stateObj = IndianStatesDistricts.find(s => s.state === stateName);
+            if (stateObj && stateObj.districts) {
+                stateObj.districts.forEach(function (district) {
+                    citySelect.append(`<option value="${district}">${district}</option>`);
+                });
+            }
+        }
+        citySelect.trigger('change');
+    });
+
+    loadStatesForModals();
 });

@@ -103,6 +103,7 @@
                                             <th>Warranty</th>
                                             <th>Quantities</th>
                                             <th>Dicounts</th>
+                                            <th>Discount Price</th>
                                             <th>Price</th>
                                             <th>Action</th>
                                         </tr>
@@ -150,6 +151,13 @@
                                                     @endif
 
 
+                                                </td>
+                                                <td>
+                                                    @if ($detailed_product->discount_price)
+                                                        ₹{{ number_format($detailed_product->discount_price, 0, '.', ',') }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     @if ($detailed_product->product_discounts->sum('discount.percentage') > 0)

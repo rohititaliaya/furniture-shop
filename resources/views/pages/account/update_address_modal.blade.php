@@ -27,7 +27,24 @@
                         <div class="col-12 mb-3 ">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" name="address"
-                                placeholder="203 An Dương Vương, phường 01, quận 5, TP.HCM" required>
+                                placeholder="House number, Street name" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <select id="state" name="state" class="form-control" required>
+                                <option value="">Select State</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <select id="city" name="city" class="form-control" required>
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 mb-3">
+                            <label for="pincode" class="form-label">Pincode</label>
+                            <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode"
+                                required>
                         </div>
                     </div>
 

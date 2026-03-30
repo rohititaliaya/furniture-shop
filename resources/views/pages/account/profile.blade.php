@@ -142,7 +142,7 @@
                                                                 <p class="receiver-name">{{ $address->receiver_name }}</p>
                                                                 <p>{{ $address->phone_number }}</p>
                                                             </div>
-                                                            <p>{{ $address->address }}</p>
+                                                            <p>{{ $address->address }}, {{ $address->city }}, {{ $address->state }} - {{ $address->pincode }}</p>
                                                             @if ($address->is_default)
                                                                 <div class="default-tag">Default</div>
                                                             @endif
@@ -153,6 +153,9 @@
                                                                 data-address-id="{{ $address->address_id }}"
                                                                 data-receiver-name="{{ $address->receiver_name }}"
                                                                 data-address="{{ $address->address }}"
+                                                                data-state="{{ $address->state }}"
+                                                                data-city="{{ $address->city }}"
+                                                                data-pincode="{{ $address->pincode }}"
                                                                 data-phone-number="{{ $address->phone_number }}"
                                                                 data-is-default="{{ $address->is_default ? 'true' : 'false' }}"><i
                                                                     class="fa fa-edit"></i> Update</button>

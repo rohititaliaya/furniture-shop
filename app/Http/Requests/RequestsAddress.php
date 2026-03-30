@@ -19,7 +19,10 @@ class RequestsAddress extends FormRequest
         return [
             'receiver_name' => 'required',
             'address' => 'required',
-            'phone_number' => ['required', 'regex:/^0[0-9]{9,10}$/'],
+            'state' => 'required',
+            'city' => 'required',
+            'pincode' => 'required|numeric',
+            'phone_number' => ['required', 'regex:/^[6-9][0-9]{9}$/'],
         ];
     }
     public function messages()
