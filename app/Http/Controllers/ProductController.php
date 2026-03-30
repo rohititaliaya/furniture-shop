@@ -85,7 +85,7 @@ class ProductController extends Controller
                         $query->where('name', 'LIKE', '%' . $search . '%');
                     });
             });
-        $products = $query->paginate(4); // 4 elements per page
+        $products = $query->paginate(10); // 10 elements per page
 
         foreach ($products as $product) {
             $average_price = 0;
