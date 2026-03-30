@@ -103,7 +103,6 @@ jQuery(document).ready(function () {
     // cart page
     function loadCart() {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let html = '';
         if (cart.length === 0) {
             const emptyCart = `<div class="empty-cart">
             <img class="" src="/images/default/empty-cart.webp" />
@@ -111,32 +110,42 @@ jQuery(document).ready(function () {
         </div>`;
             $('#js-cart-table').html(emptyCart);
         } else {
-            for (let i = 0; i < cart.length; i++) {
-                let item = cart[i];
-                html += `<div class="js-cart-item cart-item">
-                <div class="product-cart-item">
-                    <input class="js-check-cart-item" type="checkbox" name="" id="">
-                    <img src="${item.image}" alt="">
-                    <div class="info">
-                        <p> ${item.name} </p>
-                        <p class="js-sku">${item.sku}</p>
-                    </div>
-                </div>
-                <div><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
-                <div>
-                    <div class="quantities-wrapper">
-                        <button class="js-quantities-minus" ><i class="ti-minus"></i></button>
-                        <input class="js-cart-quantities-input" type="number" value="${item.quantities}">
-                        <button class="js-quantities-plus" ><i class="ti-plus"></i></button>
-                    </div>
-                </div>
-                <div><span class="js-subtotal-price">₹${formatter.format(
-                    item.unit_price * item.quantities,
-                )}</span></div>
-                <div class="js-delete-cart-item delete-item"><i class="ti-close"></i></div>
-                </div>`;
-            }
-            $('#js-cart-table').html(html);
+            $.ajax({
+                url: `/cart/async?cart=${JSON.stringify(cart)}`,
+                method: 'GET',
+                success: function (response) {
+                    let cart = response.cart;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    let html = '';
+                    for (let i = 0; i < cart.length; i++) {
+                        let item = cart[i];
+                        html += `<div class="js-cart-item cart-item">
+                        <div class="product-cart-item">
+                            <input class="js-check-cart-item" type="checkbox" name="" id="">
+                            <img src="${item.image}" alt="">
+                            <div class="info">
+                                <p> ${item.name} </p>
+                                <p class="js-sku">${item.sku}</p>
+                            </div>
+                        </div>
+                        <div><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
+                        <div>
+                            <div class="quantities-wrapper">
+                                <button class="js-quantities-minus" ><i class="ti-minus"></i></button>
+                                <input class="js-cart-quantities-input" type="number" value="${item.quantities}">
+                                <button class="js-quantities-plus" ><i class="ti-plus"></i></button>
+                            </div>
+                        </div>
+                        <div><span class="js-subtotal-price">₹${formatter.format(
+                            item.unit_price * item.quantities,
+                        )}</span></div>
+                        <div class="js-delete-cart-item delete-item"><i class="ti-close"></i></div>
+                        </div>`;
+                    }
+                    $('#js-cart-table').html(html);
+                    loadCartCheckout();
+                }
+            });
         }
     }
     loadCart();
