@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Razorpay\Api\Api;
 
 class OrderController extends Controller
 {
@@ -359,9 +360,41 @@ class OrderController extends Controller
         $order->update(['total_price' => $total_price]);
 
         if ($request->input('payment_method') == 'vnpay') {
-            return OrderController::payment_with_vnpay($order->order_id, $order->total_price);
+            return response()->json([
+                'type' => 'redirect',
+                'url' => OrderController::payment_with_vnpay($order->order_id, $order->total_price)
+            ]);
+        } else if ($request->input('payment_method') == 'razorpay') {
+            $keyId = env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_KEY_SECRET');
+
+            if (empty($keyId) || empty($keySecret)) {
+                return response()->json(['errors' => ['message' => ['Razorpay keys are not configured. Please add them to your .env file.']]], 400);
+            }
+
+            $api = new Api($keyId, $keySecret);
+            $razorpayOrder = $api->order->create([
+                'receipt'         => (string)$order->order_id,
+                'amount'          => $order->total_price * 100, // in paise
+                'currency'        => 'INR',
+            ]);
+
+            return response()->json([
+                'type' => 'razorpay',
+                'order_id' => $razorpayOrder['id'],
+                'amount' => $razorpayOrder['amount'],
+                'key' => env('RAZORPAY_KEY_ID'),
+                'internal_order_id' => $order->order_id,
+                'customer_name' => $order->receiver_name,
+                'customer_email' => Auth::user()->email,
+                'customer_phone' => $order->phone_number,
+                'app_name' => config('app.name'),
+            ]);
         } else {
-            return config('app.url') . 'checkout/' . $order->order_id;
+            return response()->json([
+                'type' => 'redirect',
+                'url' => config('app.url') . 'checkout/' . $order->order_id
+            ]);
         }
     }
 

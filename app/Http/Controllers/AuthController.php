@@ -31,35 +31,16 @@ class AuthController extends Controller
     {
         return view('auth.forgot-password');
     }
-    public function account_verification_ui(Request $request)
-    {
-        $user_id = $request->route('user_id');
-        $user = User::find($user_id);
-        return view('auth.account-verification', ['user' => $user]);
-    }
-    public function forgot_password_verification_ui(Request $request)
-    {
-        $user_id = $request->route('user_id');
-        return view('auth.forgot-password-verification', ['user_id' => $user_id]);
-    }
     public function login(Request $request)
     {
         // check user exists
         $user = User::where('email', $request->input('email'))->first();
         if ($user) {
             if ($user->is_active == false) return response()->json(['errors' => ['message' => ['This account is not active.']]], 400);
-            if ($user->is_verified == false) return response()->json(['errors' => ['message' => ['This account is not verified.']]], 400);
-            // check password
             if (Hash::check($request->input('password'), $user->password)) {
-                if ($user->is_verified) {
-                    // authenticated
-                    Auth::login($user);
-                    if ($user->is_staff)
-                        return response()->json(['message' => 'Authenticated.'], 200);
-                    else
-                        return response()->json(['message' => 'Authenticated.'], 200);
-                    // user haven't verified
-                } else return response()->json(['errors' => ['message' => ['This account is not verified.']]], 400);
+                // authenticated
+                Auth::login($user);
+                return response()->json(['message' => 'Authenticated.'], 200);
             } else {
                 // invalid password
                 return response()->json(['errors' => ['message' => ['Invalid password.']]], 400);
@@ -83,23 +64,11 @@ class AuthController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
+                'is_verified' => true,
             ]);
-            // generate otp
-            $otp = rand(100000, 999999);
-            $expiredTime = Carbon::now()->addMinutes(5);
-            $user_verify = UserVerify::where('user_id', $user->user_id)->first();
-            if ($user_verify) {
-                $user_verify->update(['otp' => $otp, 'expired_time' => $expiredTime]);
-            } else {
-                $user_verify = UserVerify::create(['user_id' => $user->user_id, 'otp' => $otp, 'expired_time' => $expiredTime]);
-            }
-            // send mail here
-            Mail::raw('Your code is ' . $otp, function ($message) use ($user) {
-                $message->to($user->email);
-            });
-
+            Auth::login($user);
             // response
-            return response()->json(['message' => 'User created.', 'user_id' => $user->user_id], 200);
+            return response()->json(['message' => 'User updated and logged in.'], 200);
         } else {
             $user = User::create([
                 'email' => $request->input('email'),
@@ -107,68 +76,15 @@ class AuthController extends Controller
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'avatar' => config('app.url') . 'images/default/default_avatar.jpg',
+                'is_verified' => true,
             ]);
-            // generate otp
-            $otp = rand(100000, 999999);
-            $expiredTime = Carbon::now()->addMinutes(5);
-
-            // create user_verify
-            $user_verify = UserVerify::create(['user_id' => $user->user_id, 'otp' => $otp, 'expired_time' => $expiredTime]);
-            // send mail here
-            Mail::raw('Your code is ' . $otp, function ($message) use ($user) {
-                $message->to($user->email);
-            });
-
+            Auth::login($user);
             // response
-            return response()->json(['message' => 'User created.', 'user_id' => $user->user_id], 200);
+            return response()->json(['message' => 'User created and logged in.'], 200);
         }
     }
-    public function account_verification(OTPVerification $request)
-    {
-        // check existed account
-        $user_id = $request->route('user_id');
-        $user_verify = UserVerify::where('user_id', $user_id)
-            ->where('otp', $request->input('otp'))
-            ->where('expired_time', '>=', now())
-            ->first();
-        if ($user_verify) {
-            $user = User::find($user_id);
-            if ($user) {
-                $user->update([
-                    'is_verified' => true,
-                ]);
-                // authenticated
-                Auth::login($user);
-                $user_verify->delete();
-
-                // response
-                return redirect('/');
-            }
-            abort(500, 'User not found.');
-            // ...
-        }
-        abort(500, 'Invalid Code.');
-    }
 
 
-    public function resend_otp(Request $request)
-    {
-        $user_id = $request->route('user_id');
-        $user_verify = UserVerify::where('user_id', $user_id)->first();
-        $user = User::find($user_id);
-        if ($user_verify) {
-            // generate otp
-            $otp = rand(100000, 999999);
-            $expiredTime = Carbon::now()->addMinutes(5);
-            $user_verify->update(['otp' => $otp, 'expired_time' => $expiredTime]);
-            // send mail here
-            Mail::raw('Your code is ' . $otp, function ($message) use ($user) {
-                $message->to($user->email);
-            });
-            // response
-            return back();
-        } else return back()->withErrors(['otp' => 'Some went wrong!'])->withInput($request->input());
-    }
     public function logout()
     {
         Auth::logout();
@@ -178,7 +94,7 @@ class AuthController extends Controller
     public function forgot_password(ForgotPassword $request)
     {
         // check existed user
-        $user = User::where('email', $request->input('email'))->where('is_active', true)->where('is_verified', true)->first();
+        $user = User::where('email', $request->input('email'))->where('is_active', true)->first();
         if ($user) {
             // generate new password
             $otp = rand(100000, 999999);

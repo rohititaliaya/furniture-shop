@@ -107,17 +107,11 @@
                                     </div>
                                 </div>
                                 <div class="payment-method">
-                                    <label class="payment-method-label" for="cash-on-delivery">
-                                        <i class="fa-solid fa-truck-fast"></i>
-                                        <span>Cash on delivery</span>
-                                        <input type="radio" name="payment_method" id="cash-on-delivery"
-                                            value="cash-on-delivery" checked>
-                                        <div class="mark"></div>
-                                    </label>
-                                    <label class="payment-method-label" for="payment-with-vnpay">
-                                        <i class="fa-solid fa-credit-card"></i>
-                                        <span>Payment with VNPay</span>
-                                        <input type="radio" name="payment_method" id="payment-with-vnpay" value="vnpay">
+                                    <label class="payment-method-label" for="payment-with-razorpay">
+                                        <i class="fa-solid fa-mobile-screen"></i>
+                                        <span>Pay with UPI (Razorpay)</span>
+                                        <input type="radio" name="payment_method" id="payment-with-razorpay"
+                                            value="razorpay" checked>
                                         <div class="mark"></div>
                                     </label>
                                 </div>
@@ -131,4 +125,5 @@
     </div>
     {{-- Modal --}}
     @include('pages.checkout.select-address-modal')
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 @endsection

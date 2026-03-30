@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravelcollective/html": "^6.4",
         "livewire/livewire": "^3.4",
+        "razorpay/razorpay": "^2.9",
         "spatie/laravel-permission": "^6.3"
     },
     "require-dev": {

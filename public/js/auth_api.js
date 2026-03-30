@@ -39,7 +39,7 @@ jQuery.noConflict();
                 method: 'POST',
                 data: formData,
                 success: function (response) {
-                    window.location.href = '/account-verification/' + response.user_id;
+                    window.location.href = '/';
                     $('#loading').addClass('d-none');
                 },
                 error: function (error) {
@@ -50,46 +50,12 @@ jQuery.noConflict();
             });
         });
 
-        const inputs = $('.input-field');
-        inputs.each(function (index) {
-            $(this).on('input', function (event) {
-                if ($(this).val() && index < inputs.length - 1) {
-                    $(inputs[index + 1]).focus(); // Focus on the next input
-                }
-            });
-
-            $(this).on('keydown', function (event) {
-                if (event.key === 'Backspace' && !$(this).val() && index > 0) {
-                    $(inputs[index - 1]).focus(); // Focus on the previous input
-                }
-            });
-        });
-        // account verify form
-        $('#account-verify-form').submit(function (e) {
+        // show password toggle
+        $(document).on('click', '[title="Show password"]', function (e) {
             e.preventDefault();
-            var codeInputs = $(this).find('[data-code-input]');
-            var code = '';
-            codeInputs.each(function () {
-                code += $(this).val();
-            });
-
-            console.log({ code });
-            $.ajax({
-                url: `/account-verification/${$(this).data('user-id')}`,
-                method: 'POST',
-                data: {
-                    otp: code,
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                success: function (response) {
-                    window.location.href = '/';
-                },
-                error: function (error) {
-                    $('#js-account-verify-response').html(error.responseJSON.message);
-                },
-            });
+            const passwordInput = $(this).closest('.input-group').find('input');
+            const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+            passwordInput.attr('type', type);
         });
     });
 })(jQuery);

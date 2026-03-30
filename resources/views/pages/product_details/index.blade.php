@@ -87,7 +87,7 @@
                         <div class="product-details-quantities">
                             <div class="select-quantities-wrapper">
                                 <button class="js-quantity-minus"><i class="ti-minus"></i></button>
-                                <input class="js-quantity-input quantity-input" type="number" value="0">
+                                <input class="js-quantity-input quantity-input" type="number" value="1">
                                 <button class="js-quantity-add"><i class="ti-plus"></i></button>
                             </div>
 
@@ -100,8 +100,10 @@
 
                         </div>
                         <div class="product-details-action-wrap">
-                            <button class="js-add-to-cart add-to-cart disable" disabled>Add to cart</button>
-                            <button class="js-buy-now buy-now disable " disabled>Buy now</button>
+                            <button class="js-add-to-cart add-to-cart @if ($product->detailed_products->first()->quantities == 0) disable @endif"
+                                @if ($product->detailed_products->first()->quantities == 0) disabled @endif>Add to cart</button>
+                            <button class="js-buy-now buy-now @if ($product->detailed_products->first()->quantities == 0) disable @endif "
+                                @if ($product->detailed_products->first()->quantities == 0) disabled @endif>Buy now</button>
                         </div>
                         <div class="product-details-meta">
                             <ul>

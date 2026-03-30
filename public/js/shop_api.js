@@ -39,8 +39,14 @@ jQuery(document).ready(function () {
         $(`.js-product-name-price.${sku}`).removeClass('d-none');
         $('.js-product-quantities').addClass('d-none');
         $(`.js-product-quantities.${sku}`).removeClass('d-none');
-        $('.quantity-input').val(0);
-        enableOrderActionButton(false);
+        const quantities = parseInt($(`.js-product-quantities.${sku}`).data('quantities'));
+        if (quantities > 0) {
+            $('.quantity-input').val(1);
+            enableOrderActionButton(true);
+        } else {
+            $('.quantity-input').val(0);
+            enableOrderActionButton(false);
+        }
         // get data
     });
 

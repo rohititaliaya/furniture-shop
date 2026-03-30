@@ -346,11 +346,46 @@ jQuery(document).ready(function () {
                 console.log('====================================');
                 console.log(response);
                 console.log('====================================');
-                window.location.href = response;
+                if (typeof response === 'object' && response.type === 'razorpay') {
+                    var options = {
+                        "key": response.key,
+                        "amount": response.amount,
+                        "currency": "INR",
+                        "name": response.app_name,
+                        "description": "Order Payment",
+                        "order_id": response.order_id,
+                        "handler": function (payment_response) {
+                            window.location.href = "/checkout/" + response.internal_order_id;
+                        },
+                        "prefill": {
+                            "name": response.customer_name,
+                            "email": response.customer_email,
+                            "contact": response.customer_phone
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.on('payment.failed', function (payment_response) {
+                        alert("Payment failed: " + payment_response.error.description);
+                    });
+                    rzp1.open();
+                } else if (typeof response === 'object' && response.type === 'redirect') {
+                    window.location.href = response.url;
+                } else {
+                    window.location.href = response;
+                }
             },
             error: function (error) {
                 $('#checkout-error').removeClass('d-none');
-                $('#checkout-error').text('*' + Object.values(error.responseJSON.errors)[0][0]);
+                let errorMessage = 'Something went wrong. Please try again.';
+                if (error.responseJSON && error.responseJSON.errors) {
+                    errorMessage = Object.values(error.responseJSON.errors)[0][0];
+                } else if (error.responseJSON && error.responseJSON.message) {
+                    errorMessage = error.responseJSON.message;
+                }
+                $('#checkout-error').text('*' + errorMessage);
                 console.log(error);
             },
         });

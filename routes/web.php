@@ -38,10 +38,6 @@ Route::middleware([AuthMiddleware::class])->group(function () {
     // register
     Route::get('register', [AuthController::class, 'register_ui'])->name('register');
     Route::post('register', [AuthController::class, 'register']);
-    // account verification
-    Route::get('account-verification/{user_id}', [AuthController::class, 'account_verification_ui'])->where('id', '[0-9]+');
-    Route::post('account-verification/{user_id}', [AuthController::class, 'account_verification'])->where('id', '[0-9]+');
-    Route::get('resend-otp/{user_id}', [AuthController::class, 'resend_otp'])->where('id', '[0-9]+');
     // forgot password
     Route::get('forgot-password', [AuthController::class, 'forgot_password_ui']);
     Route::post('forgot-password', [AuthController::class, 'forgot_password']);
