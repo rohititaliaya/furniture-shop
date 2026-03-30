@@ -46,7 +46,7 @@ class ProductController extends Controller
                         $query->where('name', 'LIKE', '%' . $search . '%');
                     });
             });
-        $products = $query->paginate(4); // 4 elements per page
+        $products = $query->paginate(10); // 4 elements per page
         $brands = Brand::orderBy('index', 'asc')->get();
         $categories = Category::orderBy('index', 'asc')->get();
         $data = [
