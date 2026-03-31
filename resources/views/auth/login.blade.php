@@ -42,7 +42,7 @@
             </form>
         </div>
         {{-- <div class="hr-text">or</div> --}}
-        {{-- <div class="card-body">
+        <div class="card-body">
             <div class="row">
                 <div class="col"><a href="{{ route('google.login') }}" class="btn w-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -54,7 +54,7 @@
                         </svg>
                         Login with Google
                     </a></div>
-                <div class="col">
+                {{-- <div class="col">
                     <a href="{{ route('facebook.login') }}" class="btn w-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="#2490f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -64,9 +64,9 @@
                         </svg>
                         Login with Facebook
                     </a>
-                </div>
+                </div> --}}
             </div>
-        </div> --}}
+        </div>
     </div>
     <div class="text-center text-muted mt-3">
         Don't have account yet? <a href="/register" tabindex="-1">Sign up</a>

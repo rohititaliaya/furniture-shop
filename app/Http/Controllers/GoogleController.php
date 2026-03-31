@@ -11,13 +11,13 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function handleGoogleCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
             $finduser = User::where('email', $user->email)->first();
             if ($finduser) {
                 Auth::login($finduser);
@@ -36,7 +36,7 @@ class GoogleController extends Controller
             }
             return redirect('/');
         } catch (\Throwable $th) {
-            abort(500, $th->getMessage());
+            return redirect('/login')->with('error', 'Google login failed: ' . $th->getMessage());
         }
     }
 }
