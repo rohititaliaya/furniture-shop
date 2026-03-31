@@ -43,7 +43,7 @@
                     <div class="shop-bottom-area">
                         <div class="tab-content jump">
                             <div id="shop-1" class="tab-pane active">
-                                <div id="product-list" class="row gap-3">
+                                <div id="product-list" class="row gy-3">
                                     @foreach ($products as $product)
                                         @php
                                             $detailed_product = $product->detailed_product;

@@ -11,7 +11,7 @@
         </div>
         <div class="tab-content jump">
             <div id="pro-1" class="tab-pane active">
-                <div class="row gap-3" id="pro-1-content">
+                <div class="row gy-3" id="pro-1-content">
                     @foreach ($best_seller_products as $product)
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product-wrap mb-35">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div id="pro-2" class="tab-pane">
-                <div class="row" id="pro-2-content">
+                <div class="row gy-3" id="pro-2-content">
                     @foreach ($latest_products as $product)
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product-wrap mb-35">
