@@ -1,21 +1,27 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Furniture Shop</title>
-    <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="Furniture Shop - Ecommerce">
+    <title>{{ $seo_title ?? 'Furniture Shop | Premium Home Decor & Furniture' }}</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="{{ $seo_description ?? 'Shop premium furniture for your home. We offer the best deals on sofas, beds, dining tables, and more.' }}">
+    <meta name="keywords" content="{{ $seo_keywords ?? 'furniture, home decor, modern furniture, premium furniture, sofa, bed, dining table' }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
-    <link rel="canonical" href="#" />
+    <link rel="canonical" href="{{ url()->current() }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Furniture Shop - Ecommerce" />
-    <meta property="og:url" content="#" />
-    <meta property="og:site_name" content="Furniture Shop - Ecommerce" />
-    <meta property="og:image" content="#" />
-    <meta property="og:description" content="The best furniture selling website in the world" />
+    <meta property="og:title" content="{{ $seo_title ?? 'Furniture Shop | Premium Home Decor & Furniture' }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:site_name" content="Furniture Shop" />
+    <meta property="og:image" content="{{ $seo_image ?? asset('images/logo/logo.png') }}" />
+    <meta property="og:description" content="{{ $seo_description ?? 'Shop premium furniture for your home. We offer the best deals on sofas, beds, dining tables, and more.' }}" />
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $seo_title ?? 'Furniture Shop | Premium Home Decor & Furniture' }}">
+    <meta name="twitter:description" content="{{ $seo_description ?? 'Shop premium furniture for your home. We offer the best deals on sofas, beds, dining tables, and more.' }}">
+    <meta name="twitter:image" content="{{ $seo_image ?? asset('images/logo/logo.png') }}">
 
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">

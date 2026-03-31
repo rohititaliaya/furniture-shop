@@ -170,6 +170,9 @@ class PagesController extends Controller
 
         $data = [
             'page' => 'Home',
+            'seo_title' => 'Home | Furniture Shop | Premium Home Decor & Furniture',
+            'seo_description' => 'Welcome to Furniture Shop. Find the best deals on premium furniture, from modern sofas to classic dining tables.',
+            'seo_keywords' => 'furniture, home decor, best deals, premium sofas, beds, dining tables',
             'deal_products' => $deal_products,
             'latest_products' => $latest_products,
             'best_seller_products' => $best_seller_products,
@@ -309,6 +312,8 @@ class PagesController extends Controller
         $categories = Category::orderBy('index', 'asc')->get();
         $data = [
             'page' => 'Shop',
+            'seo_title' => 'Shop All Products | Furniture Shop',
+            'seo_description' => 'Browse our wide selection of premium furniture products including chairs, tables, beds, and decorative items.',
             'categories' => $categories,
             'colors' => Color::all(),
             'selected_category' => $category ?? 'all',
@@ -346,6 +351,9 @@ class PagesController extends Controller
             }
             $data = [
                 'page' => 'Product Details',
+                'seo_title' => $product->name . ' | Furniture Shop',
+                'seo_description' => \Illuminate\Support\Str::limit(strip_tags($product->description), 160) ?? 'Buy ' . $product->name . ' at our Furniture Shop.',
+                'seo_image' => $product->detailed_products->first()->images->first()->url ?? null,
                 'product' => $product,
             ];
             return view('pages.product_details.index', $data);
@@ -371,7 +379,9 @@ class PagesController extends Controller
 
     {
         $data = [
-            'page' => 'About us'
+            'page' => 'About us',
+            'seo_title' => 'About Us | Furniture Shop',
+            'seo_description' => 'Learn more about Furniture Shop, our mission, vision, and the story behind our premium furniture business.',
         ];
         return view('pages.about.index', $data);
     }
@@ -379,7 +389,9 @@ class PagesController extends Controller
     public function contact()
     {
         $data = [
-            'page' => 'Contact us'
+            'page' => 'Contact us',
+            'seo_title' => 'Contact Us | Furniture Shop',
+            'seo_description' => 'Get in touch with Furniture Shop for any inquiries, support, or questions about our furniture and services.',
         ];
         return view('pages.contact.index', $data);
     }
@@ -394,7 +406,9 @@ class PagesController extends Controller
     public function privacy_policy()
     {
         $data = [
-            'page' => 'Privacy Policy'
+            'page' => 'Privacy Policy',
+            'seo_title' => 'Privacy Policy | Furniture Shop',
+            'seo_description' => 'Read the Privacy Policy of Furniture Shop. We respect your privacy and protect your personal data.',
         ];
         return view('pages.privacy_policy.index', $data);
     }
@@ -402,7 +416,9 @@ class PagesController extends Controller
     public function terms_and_conditions()
     {
         $data = [
-            'page' => 'Terms & Conditions'
+            'page' => 'Terms & Conditions',
+            'seo_title' => 'Terms & Conditions | Furniture Shop',
+            'seo_description' => 'Terms and Conditions for browsing and purchasing from Furniture Shop.',
         ];
         return view('pages.terms_and_conditions.index', $data);
     }

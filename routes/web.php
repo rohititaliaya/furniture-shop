@@ -20,6 +20,7 @@ use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarrantyController;
@@ -56,6 +57,7 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 Route::middleware([PublicMiddleware::class])->group(function () {
     // public api
+    Route::get('/sitemap.xml', [SitemapController::class, 'index']);
     Route::get('/', [PagesController::class, 'index'])->name('user');
     Route::get('/shop', [PagesController::class, 'shop'])->name('shop');
     Route::get('/about', [PagesController::class, 'about']);
