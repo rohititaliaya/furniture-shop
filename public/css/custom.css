@@ -324,6 +324,114 @@ button.checkout,
 }
 
 /* =====================================================
+   INTERNAL PAGES UI: PAGINATION, TABS, SIDEBAR
+   ===================================================== */
+/* Pagination */
+.pagination-style-1 ul li a.active,
+.pagination-style-1 ul li a.active:hover,
+.pagination-style-1 ul li a:hover {
+    background: linear-gradient(135deg, var(--aurora-start), var(--brand-light)) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+.pagination-style-1 ul li a {
+    border-radius: 8px !important;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+/* Shop Sidebar & Filters */
+.sidebar-widget {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px !important;
+}
+
+.sidebar-widget-title h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.category-selected {
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.form-colorinput-color,
+.form-taginput-tag {
+    border-radius: var(--radius-pill) !important;
+    transition: var(--transition);
+}
+
+.form-colorinput-input:checked + .form-colorinput-color {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--brand);
+}
+
+/* Tabs */
+.description-review-topbar a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    position: relative;
+    transition: var(--transition);
+    border: none !important;
+    background: none !important;
+}
+
+.description-review-topbar a.active {
+    color: var(--brand);
+    font-weight: 600;
+}
+
+.description-review-topbar a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--brand);
+    border-radius: var(--radius-pill);
+}
+
+/* Cart & Checkout tables */
+.cart-header,
+#cart-section .cart-content .cart-item {
+    border-bottom: 1px solid var(--border) !important;
+    background: var(--surface) !important;
+}
+
+.cart-header {
+    background: var(--surface-alt) !important;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    font-weight: 600;
+}
+
+#cart-section .cart-item:last-child {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-bottom: none !important;
+}
+
+#cart-section {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    background: var(--surface);
+    padding: 0;
+    overflow: hidden;
+}
+
+/* =====================================================
    ABOUT PAGE ENHANCEMENTS
    ===================================================== */
 .about-img img {

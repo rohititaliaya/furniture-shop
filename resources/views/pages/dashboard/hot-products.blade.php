@@ -16,7 +16,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product-wrap mb-35">
                                 <div class="custom-product-img  product-img img-zoom mb-25">
-                                    <a href="/products/{{ $product->product_id }}">
+                                    <a href="/products/{{ $product->slug }}">
                                         <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
                                     <div class="product-badge badge-top badge-right badge-pink">
@@ -28,16 +28,16 @@
                                         </div>
                                     @endif
                                     <div class="product-action-wrap">
-                                        <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                        <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                             title="Wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                        <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                             title="Quick View">
                                             <i class="pe-7s-look"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="/products/{{ $product->product_id }}">{{ $product->name }}</a></h3>
+                                    <h3><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                     <div class="product-price">
                                         <span
                                             class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>
@@ -56,7 +56,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product-wrap mb-35">
                                 <div class="custom-product-img  product-img img-zoom mb-25">
-                                    <a href="/products/{{ $product->product_id }}">
+                                    <a href="/products/{{ $product->slug }}">
                                         <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
                                     <div class="product-badge badge-top badge-right badge-pink">
@@ -68,16 +68,16 @@
                                         </div>
                                     @endif
                                     <div class="product-action-wrap">
-                                        <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                        <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                             title="Wishlist"><i class="pe-7s-like"></i></a>
-                                        <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                        <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                             title="Quick View">
                                             <i class="pe-7s-look"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="/products/{{ $product->product_id }}">{{ $product->name }}</a></h3>
+                                    <h3><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                     <div class="product-price">
                                         <span
                                             class="old-price">₹{{ number_format($product->detailed_product->original_price, 0, '.', ',') }}</span>

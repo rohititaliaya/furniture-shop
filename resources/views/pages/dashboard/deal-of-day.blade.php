@@ -13,16 +13,16 @@
                     <div class="swiper-slide">
                         <div class="product-wrap">
                             <div class="custom-product-img product-img img-zoom mb-25">
-                                <a href="/products/{{ $product->product_id }}">
+                                <a href="/products/{{ $product->slug }}">
                                     <img src="{{ $product->url }}" alt="">
                                 </a>
                                 <div class="product-badge badge-top badge-right badge-pink">
                                     <span>{{ $product->discount_percent }}%</span>
                                 </div>
                                 <div class="product-action-wrap">
-                                    <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                    <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                         title="Wishlist"><i class="pe-7s-like"></i></a>
-                                    <a href="/products/{{ $product->product_id }}" class="product-action-btn-1"
+                                    <a href="/products/{{ $product->slug }}" class="product-action-btn-1"
                                         title="Quick View">
                                         <i class="pe-7s-look"></i>
                                     </a>
@@ -30,7 +30,7 @@
 
                             </div>
                             <div class="product-content">
-                                <h3><a href="/products/{{ $product->product_id }}">{{ $product->name }}</a></h3>
+                                <h3><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                 <div class="product-price">
                                     <span
                                         class="old-price">₹{{ number_format($product->old_price, 0, '.', ',') }}</span>

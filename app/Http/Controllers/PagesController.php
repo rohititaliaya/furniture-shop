@@ -324,11 +324,11 @@ class PagesController extends Controller
     }
     public function product_details()
     {
-        $product_id = request()->route('product_id');
+        $slug = request()->route('slug');
         $product = Product::with(['category', 'brand', 'product_tags.tag', 'detailed_products' => function ($query) {
             $query->where('is_deleted', 0)->with('images', 'color', 'product_discounts.discount');
         }])
-            ->where('is_deleted', false)->where('product_id', $product_id)->first();
+            ->where('is_deleted', false)->where('slug', $slug)->first();
         if ($product) {
             foreach ($product->detailed_products as $detailed_product) {
                 if ($detailed_product->discount_price !== null) {

@@ -51,7 +51,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                             <div class="product-wrap mb-35">
                                                 <div class="custom-product-img product-img img-zoom mb-25">
-                                                    <a href="/products/{{ $product->product_id }}">
+                                                    <a href="/products/{{ $product->slug }}">
                                                         <img src="{{ $detailed_product->image }}" alt=""
                                                             style="height: 275px">
                                                     </a>
@@ -65,10 +65,10 @@
                                                         </div>
                                                     @endif
                                                     <div class="product-action-wrap">
-                                                        <a href="/products/{{ $product->product_id }}"
+                                                        <a href="/products/{{ $product->slug }}"
                                                             class="product-action-btn-1" title="Wishlist"><i
                                                                 class="pe-7s-like"></i></a>
-                                                        <a href="/products/{{ $product->product_id }}"
+                                                        <a href="/products/{{ $product->slug }}"
                                                             class="product-action-btn-1" title="Quick View">
                                                             <i class="pe-7s-look"></i>
                                                         </a>
@@ -84,7 +84,7 @@
 
                                                 </div>
                                                 <div class="product-content">
-                                                    <h3><a>{{ $product->name }}</a>
+                                                    <h3><a href="/products/{{ $product->slug }}">{{ $product->name }}</a>
                                                     </h3>
                                                     <div class="product-price">
                                                         @if ($detailed_product->total_discount_percentage > 0)
