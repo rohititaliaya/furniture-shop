@@ -138,6 +138,11 @@ class ProductController extends Controller
             'quantities' => $request->input('quantities'),
             'amount_sold' => 0,
         ]);
+        
+        // Auto-generate unique slug
+        $product->slug = \Illuminate\Support\Str::slug($product->name) . '-' . $product->product_id;
+        $product->save();
+
         // create tags
         $tags = json_decode($request->input('tags'));
 
@@ -169,6 +174,7 @@ class ProductController extends Controller
         if ($product) {
             $product->update([
                 'name' => $request->input('title'),
+                'slug' => \Illuminate\Support\Str::slug($request->input('title')) . '-' . $product->product_id,
                 'category_id' => $request->input('category'),
                 'brand_id' => $request->input('brand'),
                 'description' => $request->input('description'),
