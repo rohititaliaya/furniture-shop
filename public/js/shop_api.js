@@ -197,7 +197,7 @@ jQuery(document).ready(function () {
         return `<div class="col-lg-4 col-md-4 col-sm-6 col-12">
         <div class="product-wrap mb-35" >
             <div class="custom-product-img product-img img-zoom mb-25">
-                <a href="/products/${product.product_id}">
+                <a href="/products/${product.slug}">
                     <img src="${product.detailed_product.image}" alt="" style="height: 275px">
                 </a>
                 <div class="product-badge badge-top badge-right badge-pink">
@@ -216,10 +216,10 @@ jQuery(document).ready(function () {
                 }
                 
                 <div class="product-action-wrap">
-                    <a href="/products/${product.product_id}"
+                    <a href="/products/${product.slug}"
                         class="product-action-btn-1" title="View"><i
                             class="pe-7s-like"></i></a>
-                    <a href="/products/${product.product_id}" class="product-action-btn-1" title="View">
+                    <a href="/products/${product.slug}" class="product-action-btn-1" title="View">
                         <i class="pe-7s-look"></i>
                     </a>
                 </div>
@@ -235,7 +235,7 @@ jQuery(document).ready(function () {
             </div>
             <div class="product-content">
                 <h3><a
-                        href="/products/${product.product_id}">${product.name}</a>
+                        href="/products/${product.slug}">${product.name}</a>
                 </h3>
                 <div class="product-price">
                 ${

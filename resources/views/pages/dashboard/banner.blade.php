@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-7 col-md-7">
                 <div class="banner-wrap mb-30">
-                    <a href="/products/1"><img src="{{ asset('images/banner/banner-4.png') }}" alt=""></a>
+                    <a href="/shop"><img src="{{ asset('images/banner/banner-4.png') }}" alt=""></a>
                     <div class="banner-content-2">
                         <span>Sale 30%</span>
                         <h2>Easy Chair</h2>
@@ -18,7 +18,7 @@
             </div>
             <div class="col-lg-5 col-md-5">
                 <div class="banner-wrap bg-gray-4 mb-30" style="">
-                    <a href="/products/1"><img src="{{ asset('images/banner/banner-5.png') }}" alt=""></a>
+                    <a href="/shop"><img src="{{ asset('images/banner/banner-5.png') }}" alt=""></a>
                     <div class="banner-content-3">
                         <h3>Up To 30% <img src="{{ asset('images/icon-img/sale.png') }}" alt=""> Every Item
                         </h3>
@@ -35,7 +35,7 @@
                 <h2 class="">New <br>Chair Set</h2>
                 <h3 class="">Up To 30% Off</h3>
                 <div class="btn-style-2 btn-hover">
-                    <a href="/products/1" class="btn">
+                    <a href="/shop" class="btn">
                         Shop Now
                     </a>
                 </div>
