@@ -25,6 +25,7 @@ class PagesController extends Controller
     {
         $deal_products = Product::select([
             'products.product_id',
+            'products.slug',
             'products.name',
             'product_details.sku',
             'product_images.url',
@@ -512,8 +513,9 @@ class PagesController extends Controller
 
         $new_cart = [];
         foreach ($cart as $item) {
-            $detailed_product = ProductDetail::where('sku', $item->sku)->with('images', 'product_discounts.discount')->first();
+            $detailed_product = ProductDetail::where('sku', $item->sku)->with('images', 'product_discounts.discount', 'product')->first();
             if ($detailed_product) {
+                $item->slug = $detailed_product->product->slug;
                 if ($detailed_product->discount_price !== null) {
                     $item->unit_price = $detailed_product->discount_price;
                 } else {

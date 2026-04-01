@@ -91,10 +91,10 @@ jQuery(document).ready(function () {
                         html += `<li>
                                 <div class="cart-item-info">
                                     <div class="cart-img">
-                                        <a href="#"><img src="${item.image}" alt=""></a>
+                                        <a href="/products/${item.slug}"><img src="${item.image}" alt=""></a>
                                     </div>
                                     <div class="cart-title">
-                                        <h4><a>${item.name}</a></h4>
+                                        <h4><a href="/products/${item.slug}">${item.name}</a></h4>
                                         <span> ${item.quantities} × <span class="unit-price">${
                                             '₹' + formatter.format(item.unit_price)
                                         }</span> </span>

@@ -36,7 +36,7 @@
         <script src="{{ asset('js/vendor/toastify.min.js') }}" defer></script>
         <!-- Main JS -->
         <script src="{{ asset('js/main.js') }}" defer></script>
-        <script src="{{ asset('js/shop_api.js') }}" defer></script>
+        <script src="{{ asset('js/shop_api.js') }}?v={{ time() }}" defer></script>
         <script src="{{ asset('js/profile_api.js') }}" defer></script>
         @include('components.mini-cart')
         @yield('content')

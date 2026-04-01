@@ -21,4 +21,4 @@
          </div>
      </div>
  </div>
- <script src="{{ asset('js/cart.js') }}" defer></script>
+ <script src="{{ asset('js/cart.js') }}?v={{ time() }}" defer></script>
