@@ -73,8 +73,11 @@ jQuery(document).ready(function () {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         $.ajax({
-            url: `/cart/async?cart=${JSON.stringify(cart)}`,
+            url: `/cart/async`,
             method: 'GET',
+            data: {
+                cart: JSON.stringify(cart)
+            },
             success: function (response) {
                 console.log(response);
                 cart = response.cart;
@@ -153,8 +156,11 @@ jQuery(document).ready(function () {
             $('#js-cart-table').html(emptyCart);
         } else {
             $.ajax({
-                url: `/cart/async?cart=${JSON.stringify(cart)}`,
+                url: `/cart/async`,
                 method: 'GET',
+                data: {
+                    cart: JSON.stringify(cart)
+                },
                 success: function (response) {
                     let cart = response.cart;
                     localStorage.setItem('cart', JSON.stringify(cart));
@@ -164,9 +170,9 @@ jQuery(document).ready(function () {
                         html += `<div class="js-cart-item cart-item">
                         <div class="product-cart-item">
                             <input class="js-check-cart-item" type="checkbox" name="" id="" checked>
-                            <img src="${item.image}" alt="">
+                            <a href="/products/${item.slug}"><img src="${item.image}" alt=""></a>
                             <div class="info">
-                                <p> ${item.name} </p>
+                                <p><a href="/products/${item.slug}"> ${item.name} </a></p>
                                 <p class="js-sku">${item.sku}</p>
                             </div>
                         </div>
