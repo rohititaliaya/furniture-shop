@@ -84,9 +84,8 @@
                     <li>
                         <a href="#">PAGES </a>
                         <ul>
-                            <li><a href="#">About Us </a></li>
-                            <li><a href="#">Cart Page</a></li>
-                            <li><a href="#">Checkout </a></li>
+                            <li><a href="/about">About Us </a></li>
+                            <li><a href="/cart">Cart Page</a></li>
                             <li><a href="/account">My Account</a></li>
                         </ul>
                     </li>
