@@ -247,12 +247,7 @@ jQuery(document).ready(function () {
                 } 
                 
                     <span class="new-price">
-                        ₹${formatter.format(
-                            product.detailed_product.original_price -
-                                (product.detailed_product.original_price *
-                                    product.detailed_product.total_discount_percentage) /
-                                    100,
-                        )}
+                        ₹${formatter.format(product.detailed_product.new_price)}
                     </span>
                 </div>
             </div>
