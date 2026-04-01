@@ -200,7 +200,7 @@ jQuery(document).ready(function () {
                 <a href="/products/${product.slug}">
                     <img src="${product.detailed_product.image}" alt="" style="height: 275px">
                 </a>
-                <div class="product-badge badge-top badge-right badge-pink">
+                <div class="product-badge badge-top badge-right badge-kesri">
                 ${
                     product.detailed_product.total_discount_percentage > 0
                         ? `<span>-${product.detailed_product.total_discount_percentage}%</span>`
@@ -209,7 +209,7 @@ jQuery(document).ready(function () {
                 </div>
                 ${
                     product.total_quantities == 0
-                        ? ` <div class="custom-product-badge product-badge badge-top badge-left badge-pink">
+                        ? ` <div class="custom-product-badge product-badge badge-top badge-left badge-kesri">
                     <span>Sold out</span>
                 </div>`
                         : ''

@@ -516,10 +516,10 @@ class PagesController extends Controller
             $detailed_product = ProductDetail::where('sku', $item->sku)->with('images', 'product_discounts.discount', 'product')->first();
             if ($detailed_product) {
                 $item->slug = $detailed_product->product->slug;
+                $total_discount_percentage = 0;
                 if ($detailed_product->discount_price !== null) {
                     $item->unit_price = $detailed_product->discount_price;
                 } else {
-                    $total_discount_percentage = 0;
                     foreach ($detailed_product->product_discounts as $product_discount) {
                         if ($product_discount->discount->is_currently_active()) {
                             $total_discount_percentage += $product_discount->discount->percentage;
@@ -529,6 +529,10 @@ class PagesController extends Controller
                 }
                 $item->name = $detailed_product->name;
                 $item->image = $detailed_product->images->first()?->url ?? asset('images/default/default_product.jpg');
+                $item->original_price = $detailed_product->original_price;
+                $item->total_discount_percentage = $detailed_product->discount_price !== null 
+                    ? round((1 - $detailed_product->discount_price / $detailed_product->original_price) * 100)
+                    : $total_discount_percentage;
                 $new_cart[] = (array) $item;
             }
         }

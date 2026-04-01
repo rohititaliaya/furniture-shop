@@ -16,7 +16,7 @@
                                 <a href="/products/{{ $product->slug }}">
                                     <img src="{{ $product->url }}" alt="">
                                 </a>
-                                <div class="product-badge badge-top badge-right badge-pink">
+                                <div class="product-badge badge-top badge-right badge-kesri">
                                     <span>{{ $product->discount_percent }}%</span>
                                 </div>
                                 <div class="product-action-wrap">

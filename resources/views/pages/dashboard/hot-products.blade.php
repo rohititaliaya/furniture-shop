@@ -19,11 +19,11 @@
                                     <a href="/products/{{ $product->slug }}">
                                         <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
-                                    <div class="product-badge badge-top badge-right badge-pink">
+                                    <div class="product-badge badge-top badge-right badge-kesri">
                                         <span>{{ $product->detailed_product->total_discount_percentage != 0 ? '-' . $product->detailed_product->total_discount_percentage . '%' : '' }}</span>
                                     </div>
                                     @if ($product->total_quantities == 0)
-                                        <div class="custom-product-badge product-badge badge-top badge-left badge-pink">
+                                        <div class="custom-product-badge product-badge badge-top badge-left badge-kesri">
                                             <span>Sold out</span>
                                         </div>
                                     @endif
@@ -59,11 +59,11 @@
                                     <a href="/products/{{ $product->slug }}">
                                         <img src="{{ $product->detailed_product->image }}" alt="" style="aspect-ratio: 1;">
                                     </a>
-                                    <div class="product-badge badge-top badge-right badge-pink">
+                                    <div class="product-badge badge-top badge-right badge-kesri">
                                         <span>{{ $product->detailed_product->total_discount_percentage != 0 ? '-' . $product->detailed_product->total_discount_percentage . '%' : '' }}</span>
                                     </div>
                                     @if ($product->total_quantities == 0)
-                                        <div class="custom-product-badge product-badge badge-top badge-left badge-pink">
+                                        <div class="custom-product-badge product-badge badge-top badge-left badge-kesri">
                                             <span>Sold out</span>
                                         </div>
                                     @endif

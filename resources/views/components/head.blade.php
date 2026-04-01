@@ -43,6 +43,35 @@
     <link rel="stylesheet" href="{{ asset('css/plugins/slinky.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}" />
+    <style>
+        .badge-kesri {
+            background-color: #FF9933 !important;
+            color: #fff !important;
+            border-radius: 5px !important;
+            padding: 2px 8px !important;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+
+        .new-price {
+            color: #FF9933 !important;
+            font-weight: bold;
+        }
+
+        .discount-tag {
+            background: #FF9933;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+    </style>
     {{-- Toastify --}}
     <link rel="stylesheet" href="{{ asset('css/vendor/toastify.min.css') }}" />
 

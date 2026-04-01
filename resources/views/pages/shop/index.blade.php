@@ -55,12 +55,12 @@
                                                         <img src="{{ $detailed_product->image }}" alt=""
                                                             style="height: 275px">
                                                     </a>
-                                                    <div class="product-badge badge-top badge-right badge-pink">
+                                                    <div class="product-badge badge-top badge-right badge-kesri">
                                                         <span>{{ $detailed_product->total_discount_percentage != 0 ? '-' . $detailed_product->total_discount_percentage . '%' : '' }}</span>
                                                     </div>
                                                     @if ($product->total_quantities == 0)
                                                         <div
-                                                            class="custom-product-badge product-badge badge-top badge-left badge-pink">
+                                                            class="custom-product-badge product-badge badge-top badge-left badge-kesri">
                                                             <span>Sold out</span>
                                                         </div>
                                                     @endif

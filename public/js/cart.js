@@ -98,9 +98,11 @@ jQuery(document).ready(function () {
                                     </div>
                                     <div class="cart-title">
                                         <h4><a href="/products/${item.slug}">${item.name}</a></h4>
-                                        <span> ${item.quantities} × <span class="unit-price">${
-                                            '₹' + formatter.format(item.unit_price)
-                                        }</span> </span>
+                                        <span> ${item.quantities} × <span class="unit-price">
+                                            ${item.total_discount_percentage > 0 ? `<span class="old-price" style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 5px;">₹${formatter.format(item.original_price)}</span>` : ''}
+                                            <span class="new-price" style="color: #FF9933; font-weight: bold;">₹${formatter.format(item.unit_price)}</span>
+                                            ${item.total_discount_percentage > 0 ? `<span class="discount-tag" style="background: #FF9933; color: #fff; padding: 2px 5px; border-radius: 3px; font-size: 0.8em; margin-left: 5px;">-${item.total_discount_percentage}%</span>` : ''}
+                                        </span> </span>
                                     </div>
                                 </div>
                                 <div class="cart-delete">
@@ -176,7 +178,13 @@ jQuery(document).ready(function () {
                                 <p class="js-sku">${item.sku}</p>
                             </div>
                         </div>
-                        <div data-label="Unit Price"><span class="js-unit-price">₹${formatter.format(item.unit_price)}</span></div>
+                        <div data-label="Unit Price">
+                            <div class="product-price">
+                                ${item.total_discount_percentage > 0 ? `<span class="old-price" style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 8px;">₹${formatter.format(item.original_price)}</span>` : ''}
+                                <span class="js-unit-price" style="color: #FF9933; font-weight: bold;">₹${formatter.format(item.unit_price)}</span>
+                                ${item.total_discount_percentage > 0 ? `<span class="badge ms-2" style="background-color: #FF9933; color: #fff;">-${item.total_discount_percentage}%</span>` : ''}
+                            </div>
+                        </div>
                         <div data-label="Quantities">
                             <div class="quantities-wrapper">
                                 <button class="js-quantities-minus" ><i class="ti-minus"></i></button>
@@ -184,9 +192,9 @@ jQuery(document).ready(function () {
                                 <button class="js-quantities-plus" ><i class="ti-plus"></i></button>
                             </div>
                         </div>
-                        <div data-label="Total Price"><span class="js-subtotal-price">₹${formatter.format(
-                            item.unit_price * item.quantities,
-                        )}</span></div>
+                        <div data-label="Total Price">
+                            <span class="js-subtotal-price" style="font-weight: bold;">₹${formatter.format(item.unit_price * item.quantities)}</span>
+                        </div>
                         <div class="js-delete-cart-item delete-item"><i class="ti-close"></i></div>
                         </div>`;
                     }
