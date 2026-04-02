@@ -63,18 +63,19 @@
                                     class="m-0">{{ $order->order_id }}</span><br>
                                 <strong>Status: </strong>{{ $order->get_status() }}<br>
                                 <strong>Paid: </strong>{{ $order->get_is_paid() }}<br>
-                                <strong>Total price:
-                                </strong>
-                                <span
-                                    class="text-success">₹{{ number_format(
-                                        $detailed_orders->sum(function ($detailed_order) {
-                                            return $detailed_order->unit_price * $detailed_order->quantities;
-                                        }),
-                                        0,
-                                        '.',
-                                        ',',
-                                    ) }}
-                                </span><br>
+                                @php
+                                    $subtotal = $order->order_details->reduce(function ($carry, $detail) {
+                                        return $carry + $detail->unit_price * $detail->quantities;
+                                    }, 0);
+                                    $gst = $subtotal * 0.18;
+                                @endphp
+                                <strong>Subtotal: </strong>
+                                <span>₹{{ number_format($subtotal, 0, '.', ',') }}</span><br>
+                                <strong>GST (18%): </strong>
+                                <span>₹{{ number_format($gst, 0, '.', ',') }}</span><br>
+                                <strong>Total price: </strong>
+                                <span class="text-success"
+                                    style="font-weight: bold;">₹{{ number_format($order->total_price, 0, '.', ',') }}</span><br>
                                 <strong>Number of products: </strong>{{ $detailed_orders->count() }}
                             </address>
                         </div>
@@ -86,6 +87,7 @@
                             <h3>Customer Infor</h3>
                             <address><strong>{{ $order->receiver_name }} <br>
                                 </strong>{{ $order->address }}<br>
+                                {{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}<br>
                                 {{ $order->phone_number }}<br>
                                 @isset($order->customer->email)
                                     <a href="mailto:{{ $order->customer->email }}">{{ $order->customer->email }}</a>

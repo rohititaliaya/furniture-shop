@@ -32,6 +32,27 @@
                                         placeholder="Enter address" value="" required>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input id="city" name="city" type="text" class="form-control"
+                                        placeholder="Enter city" value="" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input id="state" name="state" type="text" class="form-control"
+                                        placeholder="Enter state" value="" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="pincode" class="form-label">Pincode</label>
+                                    <input id="pincode" name="pincode" type="text" class="form-control"
+                                        placeholder="Enter pincode" value="" required>
+                                </div>
+                            </div>
 
 
                             <div class="col-md-6">

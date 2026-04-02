@@ -368,13 +368,8 @@ class PagesController extends Controller
     }
     public function checkout()
     {
-        if (Auth::check()) {
-            $data = ['page' => 'Checkout'];
-            return view('pages.checkout.index', $data);
-        } else {
-            session()->put('url.intended', '/checkout');
-            return redirect()->route('login');
-        }
+        $data = ['page' => 'Checkout'];
+        return view('pages.checkout.index', $data);
     }
     public function about()
 
@@ -463,6 +458,11 @@ class PagesController extends Controller
             }
         } else {
             if ($order) {
+                if ($request->has('razorpay_payment_id')) {
+                    $order->update([
+                        'is_paid' => true,
+                    ]);
+                }
                 $order->get_status = $order->get_status();
                 $data['order'] = $order;
             }

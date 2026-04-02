@@ -126,6 +126,9 @@
                                                             </div>
                                                             <div class="text-muted"><a href="#"
                                                                     class="text-reset">{{ $order->address }}</a></div>
+                                                            <div class="text-muted small text-uppercase">
+                                                                {{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -201,6 +204,9 @@
                                                             data-status="{{ $order->status }}"
                                                             data-receiver-name="{{ $order->receiver_name }}"
                                                             data-address="{{ $order->address }}"
+                                                            data-city="{{ $order->city }}"
+                                                            data-state="{{ $order->state }}"
+                                                            data-pincode="{{ $order->pincode }}"
                                                             data-phone-number="{{ $order->phone_number }}"
                                                             data-customer-id="{{ $order->customer_id }}"
                                                             data-created-by="{{ $order->created_by }}">

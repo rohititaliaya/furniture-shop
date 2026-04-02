@@ -45,7 +45,10 @@ class OrderController extends Controller
                 $query->where('order_id', 'LIKE', '%' . $search . '%')
                     ->orWhere('receiver_name', 'LIKE', '%' . $search . '%')
                     ->orWhere('phone_number', 'LIKE', '%' . $search . '%')
-                    ->orWhere('address', 'LIKE', '%' . $search . '%');
+                    ->orWhere('address', 'LIKE', '%' . $search . '%')
+                    ->orWhere('city', 'LIKE', '%' . $search . '%')
+                    ->orWhere('state', 'LIKE', '%' . $search . '%')
+                    ->orWhere('pincode', 'LIKE', '%' . $search . '%');
             });
 
         if ($type != 'all' && $type != null) {
@@ -85,6 +88,9 @@ class OrderController extends Controller
             'status' => $request->input('status'),
             'receiver_name' => $request->input('receiver_name'),
             'address' => $request->input('address'),
+            'city' => $request->input('city'),
+            'state' => $request->input('state'),
+            'pincode' => $request->input('pincode'),
             'phone_number' => $request->input('phone_number'),
             'customer_id' => $request->input('customer_id') == -1 ? null : $request->input('customer_id'),
             'created_by' => Auth::user()->user_id,
@@ -136,6 +142,9 @@ class OrderController extends Controller
                 'status' => $request->input('status'),
                 'receiver_name' => $request->input('receiver_name'),
                 'address' => $request->input('address'),
+                'city' => $request->input('city'),
+                'state' => $request->input('state'),
+                'pincode' => $request->input('pincode'),
                 'phone_number' => $request->input('phone_number'),
                 'customer_id' => $request->input('customer_id') == -1 ? null : $request->input('customer_id'),
                 'note' => $note,
@@ -177,7 +186,10 @@ class OrderController extends Controller
                 $query->where('order_id', 'LIKE', '%' . $search . '%')
                     ->orWhere('receiver_name', 'LIKE', '%' . $search . '%')
                     ->orWhere('phone_number', 'LIKE', '%' . $search . '%')
-                    ->orWhere('address', 'LIKE', '%' . $search . '%');
+                    ->orWhere('address', 'LIKE', '%' . $search . '%')
+                    ->orWhere('city', 'LIKE', '%' . $search . '%')
+                    ->orWhere('state', 'LIKE', '%' . $search . '%')
+                    ->orWhere('pincode', 'LIKE', '%' . $search . '%');
             });
 
         if ($type != 'all' && $type != null) {
@@ -329,6 +341,20 @@ class OrderController extends Controller
             }
         }
 
+        if (!Auth::check()) {
+            $name_parts = explode(' ', $request->input('receiver_name'), 2);
+            $user = User::create([
+                'first_name' => $name_parts[0],
+                'last_name' => $name_parts[1] ?? '',
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+                'is_staff' => false,
+                'is_active' => true,
+                'is_verified' => true,
+            ]);
+            Auth::login($user);
+        }
+
         // create order
         $order = Order::create([
             'receiver_name' => $request->input('receiver_name'),
@@ -358,8 +384,11 @@ class OrderController extends Controller
             Product::where('product_id', $detailed_product->product_id)->increment('amount_sold', $item['quantities']);
             $total_price += $order_detail->quantities * $order_detail->unit_price;
         }
+        $gst = $total_price * 0.18;
+        $total_with_gst = $total_price + $gst;
+
         // Update the total_price in the order
-        $order->update(['total_price' => $total_price]);
+        $order->update(['total_price' => $total_with_gst]);
 
         if ($request->input('payment_method') == 'vnpay') {
             return response()->json([

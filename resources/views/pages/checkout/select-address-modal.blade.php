@@ -8,31 +8,34 @@
                 </div>
                 <div class="address-modal-content">
                     <div class="address-list">
-                        @foreach (Auth::user()->addresses as $address)
-                            <div class="address-item">
-                                <div>
-                                    <label class="custom-radio">
-                                        <input type="radio" name="myRadio" id="myRadio"
-                                            @if ($address->is_default) checked @endif>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <div class="heading">
-                                        <p>{{ $address->receiver_name }}</p>
-                                        <div class="separate"></div>
-                                        <p>{{ $address->phone_number }}</p>
-                                    </div>
-                                    <p>{{ $address->address }}</p>
-                                    @if ($address->is_default)
-                                        <div class="default-tag">
-                                            Default
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
+                        @auth
+                            @foreach (Auth::user()->addresses as $address)
+                                <div class="address-item" data-state="{{ $address->state }}" data-city="{{ $address->city }}"
+                                    data-pincode="{{ $address->pincode }}">
 
+                                    <div>
+                                        <label class="custom-radio">
+                                            <input type="radio" name="myRadio" id="myRadio"
+                                                @if ($address->is_default) checked @endif>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <div class="heading">
+                                            <p>{{ $address->receiver_name }}</p>
+                                            <div class="separate"></div>
+                                            <p>{{ $address->phone_number }}</p>
+                                        </div>
+                                        <p>{{ $address->address }}</p>
+                                        @if ($address->is_default)
+                                            <div class="default-tag">
+                                                Default
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endauth
                     </div>
                 </div>
                 <div class="modal-footer">

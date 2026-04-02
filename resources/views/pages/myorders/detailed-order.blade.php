@@ -68,6 +68,8 @@
                                 <h3>Delivery address</h3>
                                 <p>{{ $order->receiver_name }} {{ $order->phone_number }}</p>
                                 <p>{{ $order->address }}</p>
+                                <p>{{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}</p>
+
                             </div>
                             <div class="order-summary">
                                 <h3>order summary</h3>
@@ -91,16 +93,23 @@
                             @endif
 
                         </div>
+                        @php
+                            $subtotal = $order->order_details->reduce(function ($carry, $detail) {
+                                return $carry + $detail->unit_price * $detail->quantities;
+                            }, 0);
+                            $gst = $subtotal * 0.18;
+                        @endphp
+                        <div class="footer mb-1">
+                            <h3>Subtotal</h3>
+                            <span>₹{{ number_format($subtotal, 0, '.', ',') }}</span>
+                        </div>
+                        <div class="footer mb-1">
+                            <h3>GST (18%)</h3>
+                            <span>₹{{ number_format($gst, 0, '.', ',') }}</span>
+                        </div>
                         <div class="footer">
                             <h3>Total</h3>
-                            <span>₹{{ number_format(
-                                $order->order_details->reduce(function ($carry, $detail) {
-                                    return $carry + $detail->unit_price * $detail->quantities;
-                                }, 0),
-                                0,
-                                '.',
-                                ',',
-                            ) }}</span>
+                            <span style="font-weight: bold; font-size: 1.2em;">₹{{ number_format($order->total_price, 0, '.', ',') }}</span>
                         </div>
                     </div>
                 @else

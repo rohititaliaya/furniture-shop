@@ -11,108 +11,131 @@
                     <div class="col-lg-7">
                         <div class="billing-info-wrap">
                             <h3>Billing Details</h3>
-                            @if (Auth::user())
-                                @if (isset(Auth::user()->default_address))
-                                    <div class="row close-toggle">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>Receiver name <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input id="receiver_name" type="text" name="receiver_name"
-                                                    value="{{ Auth::user()->full_name() }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                                <input id="phone_number" type="phone" name="phone_number"
-                                                    value="{{ Auth::user()->default_address->phone_number }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>State <abbr class="required" title="required">*</abbr></label>
-                                                <input id="state" type="text" name="state"
-                                                    value="{{ Auth::user()->default_address->state }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>City <abbr class="required" title="required">*</abbr></label>
-                                                <input id="city" type="text" name="city"
-                                                    value="{{ Auth::user()->default_address->city }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>Pincode <abbr class="required" title="required">*</abbr></label>
-                                                <input id="pincode" type="text" name="pincode"
-                                                    value="{{ Auth::user()->default_address->pincode }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="change-address-wrapper">
-                                                <button type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#select-address-modal"><i class="ti-pencil-alt"></i>
-                                                    Another
-                                                    address</button>
-                                            </div>
+                            @if (Auth::check() && isset(Auth::user()->default_address))
+                                <div class="row close-toggle">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="billing-info mb-20">
+                                            <label>Receiver name <abbr class="required"
+                                                    title="required">*</abbr></label>
+                                            <input id="receiver_name" type="text" name="receiver_name"
+                                                value="{{ Auth::user()->full_name() }}" readonly>
                                         </div>
                                     </div>
-                                @else
-                                    <div class="row close-toggle">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>Receiver name <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input id="receiver_name" type="text" name="receiver_name" value=""
-                                                    placeholder="">
-                                            </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="billing-info mb-20">
+                                            <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                            <input id="phone_number" type="phone" name="phone_number"
+                                                value="{{ Auth::user()->default_address->phone_number }}" readonly>
                                         </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="billing-info mb-20">
-                                                <label>Phone <abbr class="required" title="required">*</abbr></label>
-                                                <input id="phone_number" type="phone" name="phone_number" value=""
-                                                    placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="billing-info mb-20">
-                                                <label>Street Address <abbr class="required"
-                                                        title="required">*</abbr></label>
-                                                <input id="address" class="billing-address" type="text" name="address"
-                                                    value="" placeholder="House number, Street name">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>State <abbr class="required" title="required">*</abbr></label>
-                                                <select id="state" name="state" class="form-control">
-                                                    <option value="">Select State</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>City <abbr class="required" title="required">*</abbr></label>
-                                                <select id="city" name="city" class="form-control">
-                                                    <option value="">Select City</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <div class="billing-info mb-20">
-                                                <label>Pincode <abbr class="required" title="required">*</abbr></label>
-                                                <input id="pincode" type="text" name="pincode" value=""
-                                                    placeholder="Pincode">
-                                            </div>
-                                        </div>
-
-                                        <p id="checkout-error" class="text-danger d-none"></p>
-
                                     </div>
-                                @endif
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>State <abbr class="required" title="required">*</abbr></label>
+                                            <input id="state" type="text" name="state"
+                                                value="{{ Auth::user()->default_address->state }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>City <abbr class="required" title="required">*</abbr></label>
+                                            <input id="city" type="text" name="city"
+                                                value="{{ Auth::user()->default_address->city }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>Pincode <abbr class="required" title="required">*</abbr></label>
+                                            <input id="pincode" type="text" name="pincode"
+                                                value="{{ Auth::user()->default_address->pincode }}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="change-address-wrapper">
+                                            <button type="button" data-bs-toggle="modal"
+                                                data-bs-target="#select-address-modal"><i class="ti-pencil-alt"></i>
+                                                Another
+                                                address</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="row close-toggle">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="billing-info mb-20">
+                                            <label>Receiver name <abbr class="required"
+                                                    title="required">*</abbr></label>
+                                            <input id="receiver_name" type="text" name="receiver_name" value=""
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="billing-info mb-20">
+                                            <label>Phone <abbr class="required" title="required">*</abbr></label>
+                                            <input id="phone_number" type="phone" name="phone_number" value=""
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="billing-info mb-20">
+                                            <label>Street Address <abbr class="required"
+                                                    title="required">*</abbr></label>
+                                            <input id="address" class="billing-address" type="text" name="address"
+                                                value="" placeholder="House number, Street name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>State <abbr class="required" title="required">*</abbr></label>
+                                            <select id="state" name="state" class="form-control">
+                                                <option value="">Select State</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>City <abbr class="required" title="required">*</abbr></label>
+                                            <select id="city" name="city" class="form-control">
+                                                <option value="">Select City</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="billing-info mb-20">
+                                            <label>Pincode <abbr class="required" title="required">*</abbr></label>
+                                            <input id="pincode" type="text" name="pincode" value=""
+                                                placeholder="Pincode">
+                                        </div>
+                                    </div>
+
+                                    <p id="checkout-error" class="text-danger d-none"></p>
+
+                                </div>
                             @endif
+                            @guest
+                                <div class="checkout-account-fields mt-25">
+                                    <h3 class="mb-20">Create an account</h3>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="billing-info mb-20">
+                                                <label>Email Address <abbr class="required" title="required">*</abbr></label>
+                                                <input type="email" name="email" placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="billing-info mb-20">
+                                                <label>Password <abbr class="required" title="required">*</abbr></label>
+                                                <input type="password" name="password" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="billing-info mb-20">
+                                                <label>Confirm Password <abbr class="required" title="required">*</abbr></label>
+                                                <input type="password" name="password_confirmation" placeholder="Confirm Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endguest
                             <div class="additional-info-wrap">
                                 <label>Order notes</label>
                                 <textarea id="note" name="note" placeholder="Notes about your order, e.g. special notes for delivery. "></textarea>
@@ -136,6 +159,16 @@
                                         </ul>
                                     </div>
 
+                                    <div class="your-order-info">
+                                        <ul>
+                                            <li>Subtotal <span class="js-checkout-subtotal-price">...</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="your-order-info">
+                                        <ul>
+                                            <li>GST (18%) <span class="js-checkout-gst-price">...</span></li>
+                                        </ul>
+                                    </div>
                                     <div class="your-order-info order-total">
                                         <ul>
                                             <li>Total <span class="js-checkout-total-price">...</span></li>

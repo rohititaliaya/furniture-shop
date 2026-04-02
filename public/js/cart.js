@@ -35,18 +35,20 @@ jQuery(document).ready(function () {
                 });
                 stateSelect.select2({
                     placeholder: "Select State",
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
                 $('#city').select2({
                     placeholder: "Select City",
-                    allowClear: true
+                    allowClear: true,
+                    width: '100%'
                 });
             }
         });
     }
 
-    $(document).on('select2:select', '#state', function (e) {
-        const stateName = e.params.data.id;
+    $(document).on('change', '#state', function (e) {
+        const stateName = $(this).val();
         const citySelect = $('#city');
         if (citySelect.is('select')) {
             citySelect.empty().append('<option value="">Select City</option>');
@@ -58,6 +60,11 @@ jQuery(document).ready(function () {
                     });
                 }
             }
+            citySelect.select2({
+                placeholder: "Select City",
+                allowClear: true,
+                width: '100%'
+            });
             citySelect.trigger('change');
         }
     });
@@ -303,7 +310,7 @@ jQuery(document).ready(function () {
             const name = $(this).find('.info p:not(.js-sku)').text();
             const quantities = parseInt($(this).find('.js-cart-quantities-input').val());
             const unit_price = convertCurrencyToNumber($(this).find('.js-unit-price').text());
-            html += `<div class="checkout-item" data-sku="${sku}" data-unit-price="${unit_price}" data-quantities="${quantities}">
+            html += `<div class="checkout-item" data-sku="${sku}" data-name="${name.trim()}" data-unit-price="${unit_price}" data-quantities="${quantities}">
                         <p>₹${formatter.format(unit_price * quantities)}</p>
                     </div>`;
             total_price += unit_price * quantities;
@@ -327,7 +334,7 @@ jQuery(document).ready(function () {
             for (let i = 0; i < checkout_items.length; i++) {
                 const item = checkout_items[i];
                 const sku = $(item).data('sku');
-                const name = $(item).find('span').eq(1).text();
+                const name = $(item).data('name');
                 const unit_price = $(item).data('unit-price');
                 const quantities = $(item).data('quantities');
                 checkout.push({ sku, name, unit_price, quantities });
@@ -346,18 +353,24 @@ jQuery(document).ready(function () {
 
     function loadCheckoutProduct() {
         const checkout = JSON.parse(localStorage.getItem('checkout')) || [];
-        let total_price = 0;
+        let subtotal_price = 0;
         let total_quantities = 0;
+        $('.js-checkout-product').html('');
         for (let i = 0; i < checkout.length; i++) {
             const item = checkout[i];
-            let subtotal_price = convertCurrencyToNumber(item.unit_price + '') * parseInt(item.quantities);
-            total_price += subtotal_price;
+            let item_subtotal = convertCurrencyToNumber(item.unit_price + '') * parseInt(item.quantities);
+            subtotal_price += item_subtotal;
             total_quantities += parseInt(item.quantities);
             $('.js-checkout-product').append(
-                `<li>x${item.quantities} ${item.name} <span>₹${formatter.format(subtotal_price)}</span></li>`,
+                `<li>x${item.quantities} ${item.name} <span>₹${formatter.format(item_subtotal)}</span></li>`,
             );
         }
+        const gst_price = subtotal_price * 0.18;
+        const total_price = subtotal_price + gst_price;
+
         $('.js-checkout-total-product').text(total_quantities + ' products');
+        $('.js-checkout-subtotal-price').text('₹' + formatter.format(subtotal_price));
+        $('.js-checkout-gst-price').text('₹' + formatter.format(gst_price));
         $('.js-checkout-total-price').text('₹' + formatter.format(total_price));
     }
     loadCheckoutProduct();
@@ -369,9 +382,16 @@ jQuery(document).ready(function () {
             var receiverName = addressItem.find('.heading p').first().text();
             var phoneNumber = addressItem.find('.heading p').last().text();
             var address = addressItem.find('p').not('.heading p').text();
-            $('#receiver-name').val(receiverName);
-            $('#phone-number').val(phoneNumber);
+            var state = addressItem.data('state');
+            var city = addressItem.data('city');
+            var pincode = addressItem.data('pincode');
+
+            $('#receiver_name').val(receiverName);
+            $('#phone_number').val(phoneNumber);
             $('#address').val(address);
+            $('#state').val(state).trigger('change');
+            $('#city').val(city).trigger('change');
+            $('#pincode').val(pincode);
         } else {
             console.log('No address selected');
         }
@@ -420,7 +440,7 @@ jQuery(document).ready(function () {
                         "description": "Order Payment",
                         "order_id": response.order_id,
                         "handler": function (payment_response) {
-                            window.location.href = "/checkout/" + response.internal_order_id;
+                            window.location.href = "/checkout/" + response.internal_order_id + "?payment_method=razorpay&razorpay_payment_id=" + payment_response.razorpay_payment_id;
                         },
                         "prefill": {
                             "name": response.customer_name,
@@ -450,7 +470,7 @@ jQuery(document).ready(function () {
                 } else if (error.responseJSON && error.responseJSON.message) {
                     errorMessage = error.responseJSON.message;
                 }
-                $('#checkout-error').text('*' + errorMessage);
+                $('#checkout-error').html('*' + errorMessage);
                 console.log(error);
             },
         });

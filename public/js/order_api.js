@@ -67,6 +67,9 @@ jQuery.noConflict();
                 data-status="${order.status}"
                 data-receiver-name="${order.receiver_name}"
                 data-address="${order.address}"
+                data-city="${order.city}"
+                data-state="${order.state}"
+                data-pincode="${order.pincode}"
                 data-phone-number="${order.phone_number}"
                 data-customer-id="${order.customer_id}"
                 data-created-by="${order.created_by}">
@@ -89,6 +92,10 @@ jQuery.noConflict();
                                 ${newTag}
                             </div>
                             <div class="text-muted"><a href="#" class="text-reset">${order.address}</a></div>
+                            <div class="text-muted small text-uppercase">
+                                ${order.city}, ${order.state} - ${order.pincode}
+                            </div>
+
                         </div>
                     </div>
                 </td>
@@ -153,6 +160,9 @@ jQuery.noConflict();
             modal.find('#status').val(button.data('status'));
             modal.find('#receiver_name').val(button.data('receiver-name'));
             modal.find('#address').val(button.data('address'));
+            modal.find('#city').val(button.data('city'));
+            modal.find('#state').val(button.data('state'));
+            modal.find('#pincode').val(button.data('pincode'));
             modal.find('#phone_number').val(button.data('phone-number'));
 
             if (button.data('customer-id') === '') {

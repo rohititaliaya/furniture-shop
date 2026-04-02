@@ -364,9 +364,13 @@
     /*---------------------
         Select active
     --------------------- */
-    $('.select-two-active').select2();
+    $('.select-two-active').select2({
+        width: '100%'
+    });
     $(window).on('resize', function () {
-        $('.select-two-active').select2();
+        $('.select-two-active').select2({
+            width: '100%'
+        });
     });
 
     /*--- checkout toggle function ----*/

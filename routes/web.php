@@ -77,6 +77,9 @@ Route::middleware([PublicMiddleware::class])->group(function () {
 
 
     Route::get('/cart/async', [PagesController::class, 'asyncCart']);
+    // checkout
+    Route::post('/checkout', [OrderController::class, 'checkout_order'])->name('checkout');
+    Route::get('/checkout/{order_id}', [PagesController::class, 'handle_checkout_order'])->name('checkout.handle');
 });
 
 Route::middleware([PrivateMiddleware::class])->group(function () {
@@ -86,13 +89,10 @@ Route::middleware([PrivateMiddleware::class])->group(function () {
     //account
     Route::get('/account', [PagesController::class, 'profile'])->name('my_account');
     Route::post('/account/profile/update', [PagesController::class, 'update_profile']);
-    //address_card
+    // address_card
     Route::post('/account/profile/addresscard/update', [AddressController::class, 'update_address']);
     Route::post('/account/profile/addresscard/create', [AddressController::class, 'create_address']);
     Route::post('/account/profile/addresscard/remove', [AddressController::class, 'remove_address']);
-    // checkout
-    Route::post('/checkout', [OrderController::class, 'checkout_order'])->name('checkout');
-    Route::get('/checkout/{order_id}', [PagesController::class, 'handle_checkout_order'])->name('checkout.handle');
 
     // my orders
     Route::get('/myorders', [PagesController::class, 'my_orders'])->name('my_orders');
